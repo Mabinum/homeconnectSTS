@@ -27,8 +27,6 @@ public class MemberDTO {
 	
 	String sex;
 	
-	int phonenumber;
-	
 	String address;
 	
 	String dong;

@@ -63,11 +63,9 @@ public class SecurityConfig {
 		// 2.권한 설정: 회원등록-아무나, 게시물-user, 회원-admin
 		http
          .authorizeHttpRequests()
-         .requestMatchers("/register", "/api/login", "/login/*").permitAll()
-         .requestMatchers("/board/*").permitAll()
-         .requestMatchers("/member/*").permitAll()
+         .requestMatchers("/login/*").permitAll()
+         .requestMatchers("/*").permitAll()
          .anyRequest().authenticated()
-         
          .and()
          .csrf().disable() //csrf 비활성화
          //토큰을 사용하니까 세션은 사용안함

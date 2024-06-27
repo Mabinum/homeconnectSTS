@@ -37,9 +37,6 @@ public class Member extends BaseEntity  {
 	@Column(length = 100, nullable = false)
 	String sex;
 	
-	@Column(length = 100, nullable = false)
-	int phonenumber;
-	
 	@Column(length = 255, nullable = false)
 	String address;
 	
