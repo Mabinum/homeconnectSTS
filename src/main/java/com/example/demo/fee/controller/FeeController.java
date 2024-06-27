@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.fee.dto.FeeDTO;
 import com.example.demo.fee.service.FeeService;
 
+
 @RestController
 @RequestMapping("/fee")
 public class FeeController {
@@ -25,9 +26,9 @@ public class FeeController {
 	FeeService feeService;
 
 	    @PostMapping("/register")
-	    public ResponseEntity<Integer> register(@RequestBody FeeDTO fee) {
-	        int no = feeService.register(fee);
-	        return new ResponseEntity<>(no, HttpStatus.CREATED); // 201 성공 코드와 새로운 글번호를 반환한다
+	    public ResponseEntity<String> register(@RequestBody FeeDTO fee) {
+	        String userId = feeService.register(fee);
+	        return new ResponseEntity<>(userId, HttpStatus.CREATED); // 201 성공 코드와 새로운 글번호를 반환한다
 	    }
 
 	    @GetMapping("/list")
@@ -37,8 +38,8 @@ public class FeeController {
 	    }
 
 	    @GetMapping("/read")
-	    public ResponseEntity<FeeDTO> read(@RequestParam(name = "no") Integer no) {
-	        FeeDTO fee = feeService.read(no);
+	    public ResponseEntity<FeeDTO> read(@RequestParam(name = "userId") String userId) {
+	        FeeDTO fee = feeService.read(userId);
 	        if (fee != null) {
 	            return new ResponseEntity<>(fee, HttpStatus.OK); // 200 성공 코드와 게시물 정보를 반환한다
 	        } else {
@@ -47,14 +48,14 @@ public class FeeController {
 	    }
 
 	    @PutMapping("/modify")
-	    public ResponseEntity<Void> modify(@RequestBody FeeDTO feeDetails) {
-	        feeService.modify(feeDetails);
+	    public ResponseEntity<Void> modify(@RequestBody FeeDTO fee) {
+	        feeService.modify(fee);
 	        return new ResponseEntity<>(HttpStatus.NO_CONTENT); // 204 성공 코드를 반환한다
 	    }
 
 	    @DeleteMapping("/remove")
-	    public ResponseEntity<Void> remove(@RequestParam(name = "no") Integer no) {
-	        feeService.remove(no);
+	    public ResponseEntity<Void> remove(@RequestParam(name = "userId") String userId) {
+	        feeService.remove(userId);
 	        return new ResponseEntity<>(HttpStatus.NO_CONTENT); // 204 성공 코드를 반환한다
 	    }
 }

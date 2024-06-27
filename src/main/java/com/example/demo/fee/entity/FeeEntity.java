@@ -2,8 +2,6 @@ package com.example.demo.fee.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,10 +20,10 @@ import lombok.ToString;
 public class FeeEntity {
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int no;
+	@Column(length = 100)
+	String userId;
 	
-	@Column(nullable = true)
+	@Column(nullable = false)
 	int month;
 	
 	@Column(nullable = true)
@@ -39,3 +37,4 @@ public class FeeEntity {
 	
 	
 }
+

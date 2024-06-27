@@ -18,11 +18,11 @@ public class FeeServicelmpl implements FeeService {
 	FeeRepository repository;
 	
 	@Override
-	public int register(FeeDTO dto) {
+	public String register(FeeDTO dto) {
 		FeeEntity entity = dtoToEntity(dto);
 		repository.save(entity);
 		
-		return entity.getNo();
+		return entity.getUserId();
 	}
 
 	@Override
@@ -36,8 +36,8 @@ public class FeeServicelmpl implements FeeService {
 	}
 
 	@Override
-	public FeeDTO read(int no) {
-		Optional<FeeEntity> result = repository.findById(no);
+	public FeeDTO read(String userId) {
+		Optional<FeeEntity> result = repository.findById(userId);
         if(result.isPresent()) {
         	FeeEntity fee = result.get();
         	return entityToDto(fee);
@@ -48,7 +48,7 @@ public class FeeServicelmpl implements FeeService {
 
 	@Override
 	public void modify(FeeDTO dto) {
-		Optional<FeeEntity> result = repository.findById(dto.getNo());
+		Optional<FeeEntity> result = repository.findById(dto.getUserId());
         if(result.isPresent()){
             FeeEntity entity = result.get();
             entity.setMonth(dto.getMonth());
@@ -60,8 +60,9 @@ public class FeeServicelmpl implements FeeService {
 	}
 
 	@Override
-	public void remove(int no) {
-		repository.deleteById(no);
+	public void remove(String userId) {
+		repository.deleteById(userId);
 		
 	}
+
 }
