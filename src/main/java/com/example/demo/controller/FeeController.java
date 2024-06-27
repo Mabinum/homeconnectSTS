@@ -1,8 +1,8 @@
-package com.example.demo.fee.controller;
+package com.example.demo.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class feeController {
+public class FeeController {
 
 }
