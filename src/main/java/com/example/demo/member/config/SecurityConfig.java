@@ -63,7 +63,7 @@ public class SecurityConfig {
 		// 2.권한 설정: 회원등록-아무나, 게시물-user, 회원-admin
 		http
          .authorizeHttpRequests()
-         .requestMatchers("/login/*").permitAll()
+         .requestMatchers("/login/*","/fee/*").permitAll()
          .requestMatchers("/*").permitAll()
          .anyRequest().authenticated()
          .and()
