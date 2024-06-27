@@ -21,7 +21,7 @@ public class MemberController {
 	@Autowired
     MemberService service;
 
-	@PostMapping("/signup")
+	@PostMapping("/signup4")
 	public ResponseEntity<Boolean> register(@RequestBody MemberDTO dto) {
 		boolean result = service.register(dto);
 		return new ResponseEntity<>(result, HttpStatus.CREATED); //201성공코드와 처리결과 반환

@@ -1,5 +1,6 @@
 package com.example.demo.member.dto;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
@@ -23,11 +24,9 @@ public class MemberDTO {
 	
 	String name;
 	
-	int birthdate;
+	LocalDate birthdate;
 	
 	String sex;
-	
-	int phonenumber;
 	
 	String address;
 	

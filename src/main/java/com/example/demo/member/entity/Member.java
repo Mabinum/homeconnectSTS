@@ -31,24 +31,22 @@ public class Member extends BaseEntity  {
 	@Column(length = 100, nullable = false)
 	String name;
 	
-	@Column(length = 100, nullable = false)
+	@Column(length = 100)
 	LocalDate birthdate;
 	
-	@Column(length = 100, nullable = false)
+	@Column(length = 100)
 	String sex;
 	
-	@Column(length = 100, nullable = false)
-	int phonenumber;
-	
-	@Column(length = 255, nullable = false)
+	@Column(length = 255)
 	String address;
 	
-	@Column(length = 100, nullable = false)
+	@Column(length = 100)
 	String dong;
 	
-	@Column(length = 100, nullable = false)
+	@Column(length = 100)
 	String hosu;
 
-	@Column(length = 100, nullable = false)
+//	@Column(length = 100, nullable = false)
+	@Column(length = 100)
 	String role;
 }

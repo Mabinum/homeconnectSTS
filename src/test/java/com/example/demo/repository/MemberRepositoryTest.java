@@ -26,7 +26,6 @@ public class MemberRepositoryTest {
 					.name("name"+i)
 					.birthdate(LocalDate.of(2024, 02, 11))
 					.sex("성별"+i)
-					.phonenumber(010+i)
 					.address("주소"+i)
 					.dong("101동"+i)
 					.hosu("101호"+i)

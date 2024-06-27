@@ -19,8 +19,13 @@ public interface MemberService {
 				.userId(entity.getUserId())
 				.pw(entity.getPw())
 				.name(entity.getName())
+				.address(entity.getAddress())
+				.birthdate(entity.getBirthdate())
+				.dong(entity.getDong())
+				.hosu(entity.getHosu())
 				.regDate(entity.getRegDate())
 				.modDate(entity.getModDate())
+				.role(entity.getRole())
 				.build();
 
 		return dto;
@@ -32,6 +37,11 @@ public interface MemberService {
 				.userId(dto.getUserId())
 				.pw(dto.getPw())
 				.name(dto.getName())
+				.address(dto.getAddress())
+				.birthdate(dto.getBirthdate())
+				.dong(dto.getDong())
+				.hosu(dto.getHosu())
+				.role(dto.getRole())
 				.build();
 		return entity;
 	}
