@@ -48,6 +48,7 @@ public class MemberServiceImpl implements MemberService {
 		Optional<Member> result = repository.findById(id);
 		if (result.isPresent()) {
 			Member member = result.get();
+			System.out.println("성공");
 			return entityToDto(member);
 		} else {
 			return null;
