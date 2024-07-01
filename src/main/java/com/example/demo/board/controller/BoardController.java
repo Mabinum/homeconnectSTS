@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.board.dto.BoardDTO;
 import com.example.demo.board.service.BoardService;
 
-
 @RestController
 @RequestMapping("/menu4")
 public class BoardController {
@@ -30,15 +29,19 @@ public class BoardController {
 		int no = service.register(dto);
 		return new ResponseEntity<>(no, HttpStatus.OK); //200성공코드와 게시물목록을 반환한다
 	}
+	
+//	@PostMapping("/read")
+//	public ResponseEntity<Integer> register(@RequestParam(name = "no") int no) {
+//		int no = service.register(dto);
+//		return new ResponseEntity<>(no, HttpStatus.OK); //200성공코드와 게시물목록을 반환한다
+//	}
 
-	//localhost:8080/board/
 	@GetMapping("/boardlist")
 	public ResponseEntity<List<BoardDTO>> getList() {
 		List<BoardDTO> list = service.getList();
 		return new ResponseEntity<>(list, HttpStatus.OK); //200성공코드와 게시물목록을 반환한다
 	}
 
-	//localhost:8080/board?no=1
 	@GetMapping("/read")
 	public ResponseEntity<BoardDTO> read(@RequestParam(name = "no") int no) {
 		BoardDTO dto = service.read(no);
@@ -57,3 +60,4 @@ public class BoardController {
 		return new ResponseEntity(HttpStatus.OK); 
 	}
 }
+
