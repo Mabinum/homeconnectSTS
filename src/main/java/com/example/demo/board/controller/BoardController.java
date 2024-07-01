@@ -1,5 +1,7 @@
 package com.example.demo.board.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,14 +30,12 @@ public class BoardController {
 		return new ResponseEntity<>(no, HttpStatus.OK); //200성공코드와 게시물목록을 반환한다
 	}
 
-	//localhost:8080/board/
 	@GetMapping("/boardlist")
 	public ResponseEntity<List<BoardDTO>> getList() {
 		List<BoardDTO> list = service.getList();
 		return new ResponseEntity<>(list, HttpStatus.OK); //200성공코드와 게시물목록을 반환한다
 	}
 
-	//localhost:8080/board?no=1
 	@GetMapping("/read")
 	public ResponseEntity<BoardDTO> read(@RequestParam(name = "no") int no) {
 		BoardDTO dto = service.read(no);
