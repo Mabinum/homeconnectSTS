@@ -19,6 +19,8 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import com.example.demo.member.service.MemberService;
+import com.example.demo.member.service.MemberServiceImpl;
 import com.example.demo.security.filter.ApiCheckFilter;
 import com.example.demo.security.filter.ApiLoginFilter;
 import com.example.demo.security.service.UserDetailsServiceImpl;
@@ -52,6 +54,12 @@ public class SecurityConfig {
 	public JWTUtil jwtUtil() {
 		return new JWTUtil();
 	}
+	
+	@Bean
+	public MemberService memberService() {
+		return new MemberServiceImpl();
+	}
+
 
 	@Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -63,7 +71,7 @@ public class SecurityConfig {
 		// 2.권한 설정: 회원등록-아무나, 게시물-user, 회원-admin
 		http
          .authorizeHttpRequests()
-         .requestMatchers("/login/*","/fee/*").permitAll()
+         .requestMatchers("/login/*","/fee/*","/login").permitAll()
          .requestMatchers("/*").permitAll()
          .anyRequest().authenticated()
          .and()
@@ -83,7 +91,7 @@ public class SecurityConfig {
  		http.authenticationManager(authenticationManager);
  		
  		// 로그인 필터 생성: /api/login 요청이 들어오면 필터 실행
-		ApiLoginFilter apiLoginFilter = new ApiLoginFilter("/api/login", jwtUtil());
+		ApiLoginFilter apiLoginFilter = new ApiLoginFilter("/login", jwtUtil());
 		apiLoginFilter.setAuthenticationManager(authenticationManager);
 
 		// Username~Filter: 사용자 이름과 비밀번호를 사용하는 시큐리티의 기본 필터

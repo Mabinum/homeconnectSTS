@@ -5,17 +5,20 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.example.demo.member.dto.MemberDTO;
 import com.example.demo.member.entity.Member;
 import com.example.demo.member.repository.MemberRepository;
 
-@Service
+//@Service
 public class MemberServiceImpl implements MemberService {
 
 	@Autowired
 	private MemberRepository repository;
+		
+	@Autowired
+	PasswordEncoder passwordEncoder;
 		
 	@Override
 	public List<MemberDTO> getList() {
@@ -38,6 +41,11 @@ public class MemberServiceImpl implements MemberService {
 			return false;
 		}
 		Member entity = dtoToEntity(dto);
+		
+		// 패스워드 인코더로 패스워드 암호화하기
+		String enPw = passwordEncoder.encode(entity.getPw());
+		entity.setPw(enPw);
+
 
 		repository.save(entity);
 		return true;

@@ -25,7 +25,7 @@ import lombok.extern.log4j.Log4j2;
 public class ApiLoginFilter extends AbstractAuthenticationProcessingFilter {
 
     private JWTUtil jwtUtil;
-
+    
     public ApiLoginFilter(String defaultFilterProcessesUrl, JWTUtil jwtUtil) {
 
         super(defaultFilterProcessesUrl);
@@ -37,16 +37,17 @@ public class ApiLoginFilter extends AbstractAuthenticationProcessingFilter {
 	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
 			throws AuthenticationException, IOException, ServletException {
 
-		String id = request.getParameter("id");
+		String id = request.getParameter("userId");
 		String pw = request.getParameter("pw");
 		
 		if(id == null) {
-			throw new BadCredentialsException("id cannot be null");
+			throw new BadCredentialsException("아이디를 입력해주세요");
 		}
 		
 		UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(id, pw);
 
 		return getAuthenticationManager().authenticate(authToken);
+		
 	}
 
 	// 인증에 성공했으면 jwt토큰을 발급하고 응답하기
@@ -58,13 +59,12 @@ public class ApiLoginFilter extends AbstractAuthenticationProcessingFilter {
 
         log.info(authResult.getPrincipal());
 
-        //email address
-        String email = ((CustomUser)authResult.getPrincipal()).getUsername();
+        String id = ((CustomUser)authResult.getPrincipal()).getUsername();
 
         String token = null;
         try {
-            token = jwtUtil.generateToken(email);
-
+        	
+            token = jwtUtil.generateToken(id);
             response.setContentType("text/plain");
             response.getOutputStream().write(token.getBytes());
 

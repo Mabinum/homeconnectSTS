@@ -27,7 +27,7 @@ public class MemberController {
 
 //	로그인할때 DB에 데이터가 있는지, 있으면 일치하는지 확인하고 보내기
 	@GetMapping("/login")
-	public ResponseEntity<MemberDTO> read(@RequestParam(name = "userId") String userId) {
+	public ResponseEntity<MemberDTO> read(@RequestParam(name = "userId") String userId, @RequestParam(name = "pw") String pw) {
 		MemberDTO dto = service.read(userId);
 		return new ResponseEntity<>(dto, HttpStatus.OK); //200성공코드와 회원목록 반환
 	}
