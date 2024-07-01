@@ -29,6 +29,12 @@ public class BoardController {
 		int no = service.register(dto);
 		return new ResponseEntity<>(no, HttpStatus.OK); //200성공코드와 게시물목록을 반환한다
 	}
+	
+//	@PostMapping("/read")
+//	public ResponseEntity<Integer> register(@RequestParam(name = "no") int no) {
+//		int no = service.register(dto);
+//		return new ResponseEntity<>(no, HttpStatus.OK); //200성공코드와 게시물목록을 반환한다
+//	}
 
 	@GetMapping("/boardlist")
 	public ResponseEntity<List<BoardDTO>> getList() {
