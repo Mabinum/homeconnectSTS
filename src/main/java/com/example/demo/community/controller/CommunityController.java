@@ -1,5 +1,6 @@
 package com.example.demo.community.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -52,13 +54,17 @@ public class CommunityController {
     @PostMapping("/communityregister")
     // RedirectAttributes은 모델처럼 화면에 데이터를 전달하는 객체
     // 화면에서 전달한 데이터를 파라미터로 수집
-    public void registerPost(CommunityDTO dto, RedirectAttributes redirectAttributes) {
+    public ResponseEntity<Integer> registerPost(@RequestBody CommunityDTO dto, Principal principal) {
 
+    	String id = principal.getName();
+		dto.setWriter(id);
+    	
         // 게시물 등록하고 새로운 게시물 번호 반환
         int no = service.register(dto);
+        return new ResponseEntity<>(no, HttpStatus.OK);
         
         // 목록화면에 새로운 게시물 번호 전달
-        redirectAttributes.addFlashAttribute("msg", no);
+//        redirectAttributes.addFlashAttribute("msg", no);
         
         // 목록화면으로 이동. HTML경로아님. url주소를 작성할것
 //        return "redirect:/menu4/community";
