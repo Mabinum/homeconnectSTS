@@ -66,13 +66,13 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		
 		// 1.인증 필터 등록: /member 또는 /board 요청이 들어오면 사용자 인증 실행
-		String[] arr = {"/menu4/*", "/comment/*"};
+		String[] arr = {"/menu4/*", "/comment/*", "/community/*"};
 		http.addFilterBefore(new ApiCheckFilter(arr, jwtUtil(), customUserDetailsService()), UsernamePasswordAuthenticationFilter.class);
 		
 		// 2.권한 설정: 회원등록-아무나, 게시물-user, 회원-admin
 		http
          .authorizeHttpRequests()
-         .requestMatchers("/login/*","/fee/*","/login").permitAll()
+         .requestMatchers("/login/*","/fee/*","/login","/menu4/*", "/community/*").permitAll()
          .requestMatchers("/menu4/*", "/comment/*").hasAnyRole("USER","ADMIN")
 //         .requestMatchers("/member/*").hasRole("ADMIN")
          .anyRequest().authenticated()
