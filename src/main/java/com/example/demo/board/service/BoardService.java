@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.example.demo.board.dto.BoardDTO;
 import com.example.demo.board.entity.Board;
+import com.example.demo.member.entity.Member;
 
 
 public interface BoardService {
@@ -19,11 +20,13 @@ public interface BoardService {
 	void remove(int no); //게시물 삭제
 
 	default Board dtoToEntity(BoardDTO dto) {
+		Member member = Member.builder().userId(dto.getWriter()).build();
+		
 		Board entity = Board.builder()
 				.no(dto.getNo())
 				.title(dto.getTitle())
 				.content(dto.getContent())
-				.writer(dto.getWriter())
+				.writer(member)
 				.build();
 		return entity;
 	}
@@ -33,7 +36,7 @@ public interface BoardService {
 				.no(entity.getNo())
 				.title(entity.getTitle())
 				.content(entity.getContent())
-				.writer(entity.getWriter())
+				.writer(entity.getWriter().getUserId())
 				.regDate(entity.getRegDate())
 				.modDate(entity.getModDate())
 				.build();

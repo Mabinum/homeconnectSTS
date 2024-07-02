@@ -1,5 +1,6 @@
 package com.example.demo.board.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,11 @@ public class BoardController {
     BoardService service;
 
 	@PostMapping("/board")
-	public ResponseEntity<Integer> register(@RequestBody BoardDTO dto) {
+	public ResponseEntity<Integer> register(@RequestBody BoardDTO dto, Principal principal) {
+		
+		String id = principal.getName();
+		dto.setWriter(id);
+		
 		int no = service.register(dto);
 		return new ResponseEntity<>(no, HttpStatus.OK); //200성공코드와 게시물목록을 반환한다
 	}
