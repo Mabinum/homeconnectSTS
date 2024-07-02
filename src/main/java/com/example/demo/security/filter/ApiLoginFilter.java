@@ -83,7 +83,7 @@ public class ApiLoginFilter extends AbstractAuthenticationProcessingFilter {
 
             //결과 데이터 만들기
             HashMap<String, Object> data = new HashMap<>();
-            data.put("token", token.getBytes("UTF-8"));
+            data.put("token", token);
             data.put("user", member);
       
             response.setContentType("application/json");
