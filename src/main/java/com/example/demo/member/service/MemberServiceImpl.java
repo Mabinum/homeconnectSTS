@@ -6,10 +6,6 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
-<<<<<<< HEAD
-import org.springframework.stereotype.Service;
-=======
->>>>>>> branch 'develop' of https://github.com/Mabinum/homeconnectSTS.git
 
 import com.example.demo.member.dto.MemberDTO;
 import com.example.demo.member.entity.Member;
@@ -21,10 +17,6 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private MemberRepository repository;
 	
-	@Autowired
-	PasswordEncoder passwordEncoder;
-		
-		
 	@Autowired
 	PasswordEncoder passwordEncoder;
 		

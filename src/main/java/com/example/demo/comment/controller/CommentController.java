@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -43,6 +44,12 @@ public class CommentController {
 		return map;
 	}
 	
+	@ResponseBody
+	@PutMapping("/modify")
+	public void modify(@RequestBody CommentDTO dto, Principal principal) {
+		 service.modify(dto);
+	}
+
 	@ResponseBody
 	@GetMapping("/remove")
 	public HashMap<String,Boolean> remove(@RequestParam(name = "commentNo") int commentNo) {
