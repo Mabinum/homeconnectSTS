@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -64,11 +65,11 @@ public class CommunityController {
     }
 
     // 상세화면
-    @GetMapping("/communitysignup")
-    public void read(@RequestParam(name = "no") int no, Model model) {
+    @GetMapping("/communityread")
+    public ResponseEntity<CommunityDTO> read(@RequestParam(name = "no") int no) {
     	CommunityDTO dto = service.read(no);
-        model.addAttribute("dto", dto);
-    }
+		return new ResponseEntity<>(dto, HttpStatus.OK); //200성공코드와 게시물정보를 반환한다
+	}
 
     // 수정화면
     @GetMapping("/modify")
@@ -89,10 +90,10 @@ public class CommunityController {
     }
 
     // 삭제처리
-    @PostMapping("/remove")
-    public String removePost(int no) {
-        service.remove(no);
-        return "redirect:/board/list";
+    @DeleteMapping("/communitremove")
+    public ResponseEntity remove(@RequestParam(name = "no") int no) {
+		service.remove(no);
+		return new ResponseEntity(HttpStatus.OK); 
     }
 
 
