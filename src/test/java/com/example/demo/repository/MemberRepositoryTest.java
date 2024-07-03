@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.example.demo.comment.repository.CommentRepository;
 import com.example.demo.member.entity.Member;
 import com.example.demo.member.repository.MemberRepository;
 
@@ -14,6 +15,10 @@ public class MemberRepositoryTest {
 	
 	@Autowired
 	MemberRepository memberRepository;
+	
+	@Autowired
+	CommentRepository commentRepository;
+	
 	
 	@Test
 	public void 회원등록() {
@@ -35,4 +40,8 @@ public class MemberRepositoryTest {
 		}
 	}
 	
+	@Test
+	public void 삭제() {
+		commentRepository.deleteById(1);
+	}
 }
