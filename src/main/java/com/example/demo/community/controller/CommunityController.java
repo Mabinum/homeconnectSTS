@@ -6,14 +6,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.community.dto.CommunityDTO;
 import com.example.demo.community.service.CommunityService;
@@ -80,26 +80,31 @@ public class CommunityController {
 		return new ResponseEntity<>(dto, HttpStatus.OK); // 200성공코드와 게시물정보를 반환한다
 	}
 
-	// 수정화면
-	@GetMapping("/modify")
-	public void modify(@RequestParam(name = "no") int no, Model model) {
-		CommunityDTO dto = service.read(no); // 게시물 번호로 조회
-		model.addAttribute("dto", dto); // 화면에 게시물 정보 전달
-	}
+//	// 수정화면
+//	@GetMapping("/modify")
+//	public void modify(@RequestParam(name = "no") int no, Model model) {
+//		CommunityDTO dto = service.read(no); // 게시물 번호로 조회
+//		model.addAttribute("dto", dto); // 화면에 게시물 정보 전달
+//	}
 
 	// 수정처리
-	@PostMapping("/modify")
-	public String modifyPost(CommunityDTO dto, RedirectAttributes redirectAttributes) {
-		// 게시물 수정
-		service.modify(dto);
-		// 리다이렉트 주소에 파라미터 추가 (?no=1)
-		redirectAttributes.addAttribute("no", dto.getNo());
-		// 상세화면으로 이동
-		return "redirect:/board/read";
+//	@PostMapping("/modify")
+//	public String modifyPost(CommunityDTO dto, RedirectAttributes redirectAttributes) {
+//		// 게시물 수정
+//		service.modify(dto);
+//		// 리다이렉트 주소에 파라미터 추가 (?no=1)
+//		redirectAttributes.addAttribute("no", dto.getNo());
+//		// 상세화면으로 이동
+//		return "redirect:/board/read";
+//	}
+	@PutMapping("/communitymodify")
+	public ResponseEntity modify(@RequestBody CommunityDTO dto) {
+		 service.modify(dto);
+		 return new ResponseEntity(HttpStatus.OK);
 	}
 
 	// 삭제처리
-	@DeleteMapping("/communitremove")
+	@DeleteMapping("/communityremove")
 	public ResponseEntity remove(@RequestParam(name = "no") int no) {
 		service.remove(no);
 		return new ResponseEntity(HttpStatus.OK);
