@@ -9,7 +9,7 @@ public interface PayService {
 
 	String register(PayDTO dto);
 	List<PayDTO> getList();
-	PayDTO read(String imp_uid);
+	PayDTO read(String merchant_uid);
 	
 	default PayEntity dtoToEntity(PayDTO dto) {
 		PayEntity entity = PayEntity.builder()

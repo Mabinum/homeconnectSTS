@@ -4,10 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.fee.dto.PayDTO;
 import com.example.demo.fee.service.PayService;
@@ -19,11 +20,20 @@ public class PayController {
 	@Autowired
     PayService payService;
 	
-	@ResponseBody
 	@PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody PayDTO pay) {
         String merchant_uid = payService.register(pay);
         return new ResponseEntity<>(merchant_uid, HttpStatus.CREATED); 
+    }
+	
+	@GetMapping("/read")
+    public ResponseEntity<PayDTO> read(@RequestParam(name = "merchant_uid") String merchant_uid) {
+        PayDTO pay = payService.read(merchant_uid);
+        if (pay != null) {
+            return new ResponseEntity<>(pay, HttpStatus.OK); // 200 성공 코드와 게시물 정보를 반환한다
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND); // 404 에러 코드 반환
+        }
     }
 //	public String insertPaymentInfo(@RequestBody PayEntity entity) {
 //		// STEP5-3. 결제 정보 검증 후 저장하기
