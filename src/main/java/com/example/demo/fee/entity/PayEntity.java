@@ -3,7 +3,6 @@ package com.example.demo.fee.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.IdClass;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,32 +12,22 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name = "fees")
-@IdClass(FeeId.class)
+@Table(name = "pay")
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class FeeEntity {
-	
+public class PayEntity {
+
 	@Id
 	@Column(length = 100)
-	String userId;
+	String merchant_uid;
 	
-	@Id
-	@Column(nullable = false)
-	int month;
+	@Column(length = 100)
+	String imp_uid;
 	
-	@Column(nullable = true)
-	int water;
-	
-	@Column(nullable = true)
-	int electric;
-	
-	@Column(nullable = true)
-	int maintenance;
-	
+	@Column
+	int amount;
 }
-
