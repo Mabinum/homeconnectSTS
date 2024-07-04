@@ -1,4 +1,4 @@
-package com.example.demo.community.controller;
+package com.example.demo.community2.controller;
 
 import java.security.Principal;
 import java.util.List;
@@ -15,15 +15,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.community.dto.CommunityDTO;
-import com.example.demo.community.service.CommunityService;
+import com.example.demo.community2.dto.Community2DTO;
+import com.example.demo.community2.service.Community2Service;
 
 @RestController
 @RequestMapping("/menu4")
-public class CommunityController {
+public class Community2Controller {
 
 	@Autowired
-	CommunityService service;
+	Community2Service service;
 
 //	 // 메인화면
 //    @GetMapping("/main")
@@ -38,9 +38,9 @@ public class CommunityController {
 //    }
 
 	// 목록불러오기
-	@GetMapping("/community")
-	public ResponseEntity<List<CommunityDTO>> getList() {
-		List<CommunityDTO> list = service.getList();
+	@GetMapping("/community2")
+	public ResponseEntity<List<Community2DTO>> getList() {
+		List<Community2DTO> list = service.getList();
 		return new ResponseEntity<>(list, HttpStatus.OK); // 200성공코드와 게시물목록을 반환한다
 	}
 
@@ -53,11 +53,11 @@ public class CommunityController {
 
 //	@PostMapping(value = "/communityregister", consumes = "multipart/form-data")
 //    @PostMapping(value = "/communityregister", consumes = MediaType.APPLICATION_JSON_VALUE)
-    @PostMapping("/communityregister")
+    @PostMapping("/community2register")
 	// RedirectAttributes은 모델처럼 화면에 데이터를 전달하는 객체
 	// 화면에서 전달한 데이터를 파라미터로 수집
 //	public ResponseEntity<Integer> registerPost(MultipartFile uploadFile, Principal principal) {
-	public ResponseEntity<Integer> registerPost(CommunityDTO dto, Principal principal) {
+	public ResponseEntity<Integer> registerPost(Community2DTO dto, Principal principal) {
 
 		String id = principal.getName();
 		dto.setWriter(id);
@@ -74,9 +74,9 @@ public class CommunityController {
 	}
 
 	// 상세화면
-	@GetMapping("/communityread")
-	public ResponseEntity<CommunityDTO> read(@RequestParam(name = "no") int no) {
-		CommunityDTO dto = service.read(no);
+	@GetMapping("/community2read")
+	public ResponseEntity<Community2DTO> read(@RequestParam(name = "no") int no) {
+		Community2DTO dto = service.read(no);
 		return new ResponseEntity<>(dto, HttpStatus.OK); // 200성공코드와 게시물정보를 반환한다
 	}
 
@@ -97,24 +97,17 @@ public class CommunityController {
 //		// 상세화면으로 이동
 //		return "redirect:/board/read";
 //	}
-	@PutMapping("/communitymodify")
-	public ResponseEntity modify(@RequestBody CommunityDTO dto, Principal principal) {
+	@PutMapping("/community2modify")
+	public ResponseEntity modify(@RequestBody Community2DTO dto, Principal principal) {
 		 service.modify(dto);
 		 return new ResponseEntity(HttpStatus.OK);
 	}
 
 	// 삭제처리
-	@DeleteMapping("/communityremove")
+	@DeleteMapping("/community2remove")
 	public ResponseEntity remove(@RequestParam(name = "no") int no) {
 		service.remove(no);
 		return new ResponseEntity(HttpStatus.OK);
 	}
 
-	//localhost:8080/menu4/category?category=카테고리명
-	// 카테고리 별 목록 불러오기
-	@GetMapping("/category")
-    public ResponseEntity<List<CommunityDTO>> getByCategory(@RequestParam(name = "category") String category) {
-        List<CommunityDTO> list = service.getCategory(category);
-        return new ResponseEntity<>(list, HttpStatus.OK);
-    }
 }

@@ -12,6 +12,9 @@ public interface CommunityService {
 
 		// 게시물 목록조회
 		List<CommunityDTO> getList();
+		
+		// 게시물 카테고리별 목록 조회
+		List<CommunityDTO> getCategory(String category);
 
 		// 게시물 상세조회
 		CommunityDTO read(int no);
@@ -21,6 +24,7 @@ public interface CommunityService {
 
 		// 게시물 삭제
 		int remove(int no);
+		
 
 		// dto를 엔티티로 변환하는 메소드
 		default Community dtoToEntity(CommunityDTO dto) { // default키워드를 사용하여 일반메소드 추가
@@ -29,6 +33,7 @@ public interface CommunityService {
 					.title(dto.getTitle())
 					.content(dto.getContent())
 					.writer(dto.getWriter()) //날짜 생략
+					.category(dto.getCategory())
 					.build();
 			return entity;
 		}
@@ -41,6 +46,7 @@ public interface CommunityService {
 					.title(entity.getTitle())
 					.content(entity.getContent())
 					.writer(entity.getWriter())
+					.category(entity.getCategory())
 					.regDate(entity.getRegDate())
 					.modDate(entity.getModDate())
 					.imgPath(entity.getImgPath()) //이미지경로 추가

@@ -1,4 +1,4 @@
-package com.example.demo.community.dto;
+package com.example.demo.community2.dto;
 
 import java.time.LocalDateTime;
 
@@ -17,13 +17,12 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CommunityDTO {
+public class Community2DTO {
 
 	int no;
 	String title;
 	String content;
 	String writer;
-	String category;
 	LocalDateTime regDate;
 	LocalDateTime modDate;
 	MultipartFile uploadFile; // 파일 스트림 저장
