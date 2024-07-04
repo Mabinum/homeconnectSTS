@@ -1,13 +1,10 @@
-package com.example.demo.board.entity;
-
-import com.example.demo.member.entity.Member;
+package com.example.demo.community.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,7 +19,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Board extends BaseEntity{
+public class Community extends BaseEntity{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,7 +31,10 @@ public class Board extends BaseEntity{
 	@Column(length = 1500, nullable = false)
 	String content; // 내용
 
-	@ManyToOne
-	Member writer; // 작성자
-
+	@Column(length = 50, nullable = false)
+	String writer; // 작성자
+	
+	@Column(length = 200, nullable = true)
+	private String imgPath; //첨부파일 이름
+	
 }
