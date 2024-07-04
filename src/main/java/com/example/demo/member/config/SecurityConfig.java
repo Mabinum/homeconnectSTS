@@ -74,7 +74,7 @@ public class SecurityConfig {
 		// 2.권한 설정: 회원등록-아무나, 게시물-user, 회원-admin
 		http
          .authorizeHttpRequests()
-         .requestMatchers("/login/*","/fee/*","/login","/menu4/*", "/community/*").permitAll()
+         .requestMatchers("/login/*","/fee/*","/login","/menu4/*", "/community/*","/pay/*").permitAll()
          .requestMatchers("/menu4/*", "/comment/*").hasAnyRole("USER","ADMIN")
 //         .requestMatchers("/member/*").hasRole("ADMIN")
          .anyRequest().authenticated()
