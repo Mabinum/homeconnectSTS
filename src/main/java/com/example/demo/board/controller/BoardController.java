@@ -48,6 +48,8 @@ public class BoardController {
 		return new ResponseEntity<>(dto, HttpStatus.OK); //200성공코드와 게시물정보를 반환한다
 	}
 
+	
+	
 	@PutMapping("/modify")
 	public ResponseEntity modify(@RequestBody BoardDTO dto) {
 		 service.modify(dto);

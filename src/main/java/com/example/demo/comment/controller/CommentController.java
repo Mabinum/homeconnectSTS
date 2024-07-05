@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -51,7 +52,7 @@ public class CommentController {
 	}
 
 	@ResponseBody
-	@GetMapping("/remove")
+	@DeleteMapping("/remove")
 	public HashMap<String,Boolean> remove(@RequestParam(name = "commentNo") int commentNo) {
 		HashMap<String,Boolean> map = new HashMap<>();
 		service.remove(commentNo);
