@@ -112,7 +112,7 @@ public class CommunityController {
 
 	//localhost:8080/menu4/category?category=카테고리명
 	// 카테고리 별 목록 불러오기 푸시 여부 확인
-	@GetMapping("/category")
+	@GetMapping("/communitycategory")
     public ResponseEntity<List<CommunityDTO>> getByCategory(@RequestParam(name = "category") String category) {
         List<CommunityDTO> list = service.getCategory(category);
         return new ResponseEntity<>(list, HttpStatus.OK);

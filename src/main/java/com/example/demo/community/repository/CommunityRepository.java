@@ -8,5 +8,5 @@ import com.example.demo.community.entity.Community;
 
 public interface CommunityRepository extends JpaRepository<Community, Integer>{
 
-	List<Community> findByProdCategory(String category);
+	List<Community> findByCategory(String category);
 }

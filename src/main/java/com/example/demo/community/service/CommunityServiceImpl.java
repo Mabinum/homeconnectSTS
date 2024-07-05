@@ -52,9 +52,13 @@ public class CommunityServiceImpl implements CommunityService{
 		// 카테고리별 목록 조회 
 		@Override
 		public List<CommunityDTO> getCategory(String category) {
-			List<Community> entityList = repository.findByProdCategory(category);
-			return entityList.stream()
-					.map(this::entityToDto).toList();
+			List<Community> entityList = repository.findByCategory(category);
+			List<CommunityDTO> list = new ArrayList<>();
+			list = entityList.stream().map(entity -> entityToDto(entity)).collect(Collectors.toList());
+			
+			return list;
+//			return entityList.stream()
+//					.map(this::entityToDto).toList();
 		}
 
 		@Override
