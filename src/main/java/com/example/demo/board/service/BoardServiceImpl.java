@@ -25,7 +25,7 @@ public class BoardServiceImpl implements BoardService {
 
 		return entity.getNo();
 	}
-
+//asas
 	@Override
 	public List<BoardDTO> getList() {
 		List<Board> entityList = repository.findAll();		
