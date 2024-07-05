@@ -52,8 +52,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public MemberDTO read(String id) {
-		Optional<Member> result = repository.findById(id);
+	public MemberDTO read(String userId) {
+		Optional<Member> result = repository.findByUserId(userId);
 		if (result.isPresent()) {
 			Member member = result.get();
 			System.out.println("성공");

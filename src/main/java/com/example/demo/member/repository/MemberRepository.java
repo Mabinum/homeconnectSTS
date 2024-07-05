@@ -1,9 +1,14 @@
 package com.example.demo.member.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.example.demo.member.entity.Member;
 
-public interface MemberRepository extends JpaRepository<Member,String >{
+import jakarta.transaction.Transactional;
 
+@Transactional
+public interface MemberRepository extends JpaRepository<Member,String >{
+	Optional<Member> findByUserId(String userId);
 }
