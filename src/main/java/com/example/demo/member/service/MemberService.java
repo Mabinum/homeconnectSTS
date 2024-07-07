@@ -13,6 +13,8 @@ public interface MemberService {
 
 	MemberDTO read(String id); //회원 단건 조회
 	
+	String idCheck(String userid);
+	
 	//엔티티를 DTO로 변환하는 메소드
 	default MemberDTO entityToDto(Member entity) {
 		MemberDTO dto = MemberDTO.builder()
