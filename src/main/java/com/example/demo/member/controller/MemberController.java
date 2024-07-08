@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,21 +14,29 @@ import com.example.demo.member.dto.MemberDTO;
 import com.example.demo.member.service.MemberService;
 
 @RestController
+@RequestMapping("/login")
 public class MemberController {
 	
 	@Autowired
     MemberService service;
 
 //	회원가입 정보 DB에 보내기
-	@PostMapping("/login/signup4")
+	@PostMapping("/signup")
 	public ResponseEntity<Boolean> register(@RequestBody MemberDTO dto) {
 		boolean result = service.register(dto);
 		return new ResponseEntity<>(result, HttpStatus.CREATED); //201성공코드와 처리결과 반환
 	}
 
-	@GetMapping("/login")
+	@GetMapping("/")
 	public ResponseEntity<MemberDTO> read(@RequestParam(name = "userId") String userId, @RequestParam(name = "pw") String pw) {
 		MemberDTO dto = service.read(userId);
 		return new ResponseEntity<>(dto, HttpStatus.OK); //200성공코드와 회원목록 반환
 	}
+	
+	@GetMapping("/idcheck")
+	public ResponseEntity<String> CheckID(@RequestParam(name="userId") String userId) {
+		String result = service.idCheck(userId);
+		return new ResponseEntity<>(result, HttpStatus.CREATED);
+	}
+	
 }

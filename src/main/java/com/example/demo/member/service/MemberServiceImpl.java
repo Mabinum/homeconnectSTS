@@ -63,4 +63,14 @@ public class MemberServiceImpl implements MemberService {
 		}
 	}
 
+	@Override
+	public String idCheck(String userId) {
+		Optional<Member> result = repository.findByUserId(userId);
+		if (result.isPresent()) {
+			System.out.println("아이디 중복");
+			return "아이디가 중복되었습니다.";
+		} else {
+			return "사용가능한 아이디입니다.";
+		}
+	}
 }
