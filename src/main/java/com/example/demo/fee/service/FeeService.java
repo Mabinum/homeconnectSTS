@@ -26,7 +26,7 @@ public interface FeeService {
 
 	default FeeDTO entityToDto(FeeEntity entity) {
 		FeeDTO dto = FeeDTO.builder()
-				.userId(entity.getUserId())
+				.UserId(entity.getUserId())
 				.month(entity.getMonth())
 				.water(entity.getWater())
 				.electric(entity.getElectric())

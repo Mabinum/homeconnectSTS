@@ -29,6 +29,7 @@ public class BoardController {
 	public ResponseEntity<Integer> register(@RequestBody BoardDTO dto, Principal principal) {
 		
 		String id = principal.getName();
+		System.out.println(id);
 		dto.setWriter(id);
 		
 		int no = service.register(dto);

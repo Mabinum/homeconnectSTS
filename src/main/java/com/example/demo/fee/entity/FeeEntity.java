@@ -14,7 +14,7 @@ import lombok.ToString;
 
 @Entity
 @Table(name = "fees")
-@IdClass(FeeId.class)
+@IdClass(FeeId.class) // 수정
 @Getter
 @Setter
 @ToString
@@ -22,6 +22,10 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 public class FeeEntity {
+	
+//	@Id
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	int no; 
 	
 	@Id
 	@Column(length = 100)

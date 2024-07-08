@@ -1,5 +1,7 @@
 package com.example.demo.fee.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,10 +32,16 @@ public class PayController {
     public ResponseEntity<PayDTO> read(@RequestParam(name = "merchant_uid") String merchant_uid) {
         PayDTO pay = payService.read(merchant_uid);
         if (pay != null) {
-            return new ResponseEntity<>(pay, HttpStatus.OK); // 200 성공 코드와 게시물 정보를 반환한다
+            return new ResponseEntity<>(pay, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND); // 404 에러 코드 반환
         }
+    }
+	
+	@GetMapping("/list")
+    public ResponseEntity<List<PayDTO>> getList() {
+        List<PayDTO> list = payService.getList();
+        return new ResponseEntity<>(list, HttpStatus.OK); // 200 성공 코드와 게시물 목록을 반환한다
     }
 //	public String insertPaymentInfo(@RequestBody PayEntity entity) {
 //		// STEP5-3. 결제 정보 검증 후 저장하기
