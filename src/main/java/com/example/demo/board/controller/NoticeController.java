@@ -15,18 +15,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.board.dto.BoardDTO;
-import com.example.demo.board.service.BoardService;
+import com.example.demo.board.dto.NoticeDTO;
+import com.example.demo.board.service.NoticeService;
 
 @RestController
-@RequestMapping("/board")
-public class BoardController {
-	
+@RequestMapping("/notice")
+public class NoticeController {
 	@Autowired
-    BoardService service;
+    NoticeService service;
 
 	@PostMapping("/register")
-	public ResponseEntity<Integer> register(@RequestBody BoardDTO dto, Principal principal) {
+	public ResponseEntity<Integer> register(@RequestBody NoticeDTO dto, Principal principal) {
 		
 		String id = principal.getName();
 		dto.setWriter(id);
@@ -37,20 +36,20 @@ public class BoardController {
 	
 
 	@GetMapping("/list")
-	public ResponseEntity<List<BoardDTO>> getList() {
-		List<BoardDTO> list = service.getList();
+	public ResponseEntity<List<NoticeDTO>> getList() {
+		List<NoticeDTO> list = service.getList();
 		return new ResponseEntity<>(list, HttpStatus.OK); //200성공코드와 게시물목록을 반환한다
 	}
 
 	@GetMapping("/read")
-	public ResponseEntity<BoardDTO> read(@RequestParam(name = "no") int no) {
-		BoardDTO dto = service.read(no);
+	public ResponseEntity<NoticeDTO> read(@RequestParam(name = "no") int no) {
+		NoticeDTO dto = service.read(no);
 		return new ResponseEntity<>(dto, HttpStatus.OK); //200성공코드와 게시물정보를 반환한다
 	}
 
 	
 	@PutMapping("/modify")
-	public ResponseEntity modify(@RequestBody BoardDTO dto) {
+	public ResponseEntity modify(@RequestBody NoticeDTO dto) {
 		 service.modify(dto);
 		 return new ResponseEntity(HttpStatus.OK);
 	}
@@ -61,4 +60,3 @@ public class BoardController {
 		return new ResponseEntity(HttpStatus.OK); 
 	}
 }
-

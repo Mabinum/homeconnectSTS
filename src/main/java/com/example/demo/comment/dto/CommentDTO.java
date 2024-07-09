@@ -20,6 +20,8 @@ public class CommentDTO {
     int commentNo; //댓글번호
 
     int boardNo; //글번호
+    
+    int noticeNo;
 
     String content; // 댓글내용
 
