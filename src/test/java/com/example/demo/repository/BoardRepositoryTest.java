@@ -32,7 +32,7 @@
 //
 //	@Test
 //	void 게시물10개등록() {
-//		Member member = Member.builder().userId("tktksgh").build();
+//		Member member = Member.builder().userId("admin1").build();
 //		
 //		for (int i = 1; i <= 10; i++) {
 //			Notice notice = Notice.builder().title(i + "번글").content("내용입니다").writer(member).build();

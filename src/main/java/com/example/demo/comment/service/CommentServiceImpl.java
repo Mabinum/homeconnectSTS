@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.board.entity.Board;
-import com.example.demo.board.entity.Notice;
 import com.example.demo.comment.dto.CommentDTO;
 import com.example.demo.comment.entity.Comment;
 import com.example.demo.comment.repository.CommentRepository;
@@ -41,19 +40,6 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	@Override
-	public List<CommentDTO> getListByNoticeNo(int noticeNo) {
-		Notice notice = Notice.builder().no(noticeNo).build();  //엔티티 생성
-		List<Comment> entityList = repository.findByNotice(notice);
-		List<CommentDTO> dtoList = new ArrayList<>();
-		for (Comment entity : entityList) {
-			CommentDTO dto = entityToDto(entity);
-			dtoList.add(dto);
-		}
-		
-		return dtoList;
-	}
-
-	@Override
 	public CommentDTO read(int no) {
 		Optional<Comment> result = repository.findById(no);
 		if(result.isPresent()) {
@@ -78,5 +64,13 @@ public class CommentServiceImpl implements CommentService {
 	public void remove(int no) {
 		repository.deleteById(no);
 	}	
+	
+	@Override
+	public void removeBoardNo(int boardNo) {
+		repository.deleteByBoardNo(boardNo);
+	}	
+	
+	
+
 
 }

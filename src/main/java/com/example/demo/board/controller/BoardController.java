@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.board.dto.BoardDTO;
 import com.example.demo.board.service.BoardService;
+import com.example.demo.comment.service.CommentService;
 
 @RestController
 @RequestMapping("/board")
@@ -24,7 +25,11 @@ public class BoardController {
 	
 	@Autowired
     BoardService service;
-
+	
+	@Autowired
+	CommentService commentService;
+	
+	
 	@PostMapping("/register")
 	public ResponseEntity<Integer> register(@RequestBody BoardDTO dto, Principal principal) {
 		
@@ -59,6 +64,7 @@ public class BoardController {
 	@DeleteMapping("/remove")
 	public ResponseEntity remove(@RequestParam(name = "no") int no) {
 		service.remove(no);
+		commentService.removeBoardNo(no);
 		return new ResponseEntity(HttpStatus.OK); 
 	}
 }

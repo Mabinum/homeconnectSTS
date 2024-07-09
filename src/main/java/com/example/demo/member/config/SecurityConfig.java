@@ -68,21 +68,15 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		
 		// 1.인증 필터 등록: /member 또는 /board 요청이 들어오면 사용자 인증 실행
-		String[] arr = {"/comment/*", "/community/*","/board/*","/notice/*"};
+		String[] arr = {"/comment/*", "/community/*","/board/*","/notice/*","/noticeComment/*"};
 		http.addFilterBefore(new ApiCheckFilter(arr, jwtUtil(), customUserDetailsService()), UsernamePasswordAuthenticationFilter.class);
 		
 		// 2.권한 설정: 회원등록-아무나, 게시물-user, 회원-admin
 		http
          .authorizeHttpRequests()
-<<<<<<< HEAD
          .requestMatchers("/login/*","/fee/*", "/community/*","/pay/*").permitAll()
-         .requestMatchers("/board/*", "/comment/*").hasAnyRole("USER","ADMIN")
+         .requestMatchers("/board/*", "/comment/*","/notice/*","/noticeComment/*").hasAnyRole("USER","ADMIN")
 //         .requestMatchers("/notice/*").hasRole("ADMIN")
-=======
-         .requestMatchers("/login/*","/fee/*","/login","/menu4/*", "/community/*","/pay/*").permitAll()
-         .requestMatchers("/menu4/*", "/comment/*").hasAnyRole("USER","ADMIN")
-         .requestMatchers("/feelnput", "/menu4/Noticemain").hasRole("ADMIN")
->>>>>>> branch 'develop' of https://github.com/Mabinum/homeconnectSTS.git
          .anyRequest().authenticated()
          .and()
          .csrf().disable() //csrf 비활성화

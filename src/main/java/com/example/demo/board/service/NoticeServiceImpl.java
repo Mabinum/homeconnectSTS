@@ -10,12 +10,16 @@ import org.springframework.stereotype.Service;
 import com.example.demo.board.dto.NoticeDTO;
 import com.example.demo.board.entity.Notice;
 import com.example.demo.board.repository.NoticeRepository;
+import com.example.demo.noticeComment.repository.NoticeCommentRepository;
 
 @Service
 public class NoticeServiceImpl implements NoticeService{
 	@Autowired
 	NoticeRepository repository;
 
+	@Autowired
+	NoticeCommentRepository noticeCommentRepository;
+	
 	@Override
 	public int register(NoticeDTO dto) {
 		Notice entity = dtoToEntity(dto);
@@ -58,6 +62,7 @@ public class NoticeServiceImpl implements NoticeService{
 
 	@Override
 	public void remove(int no) {
+		noticeCommentRepository.deleteByNoticeNo(no);
 		repository.deleteById(no);
 	}
 }
