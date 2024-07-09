@@ -49,7 +49,6 @@ public class BoardController {
 	}
 
 	
-	
 	@PutMapping("/modify")
 	public ResponseEntity modify(@RequestBody BoardDTO dto) {
 		 service.modify(dto);

@@ -30,15 +30,10 @@ public class MemberDTO {
 	
 	String address;
 	
-	String dong;
-	
-	String hosu;
-	
 	LocalDateTime regDate;
 
     LocalDateTime modDate;
     
     String role;
-	
 	
 }
