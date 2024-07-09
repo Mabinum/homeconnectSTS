@@ -7,29 +7,27 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.board.dto.BoardDTO;
-import com.example.demo.board.entity.Board;
-import com.example.demo.board.repository.BoardRepository;
-
+import com.example.demo.board.dto.NoticeDTO;
+import com.example.demo.board.entity.Notice;
+import com.example.demo.board.repository.NoticeRepository;
 
 @Service
-public class BoardServiceImpl implements BoardService {
-
+public class NoticeServiceImpl implements NoticeService{
 	@Autowired
-	BoardRepository repository;
+	NoticeRepository repository;
 
 	@Override
-	public int register(BoardDTO dto) {
-		Board entity = dtoToEntity(dto);
+	public int register(NoticeDTO dto) {
+		Notice entity = dtoToEntity(dto);
 		repository.save(entity);
 
 		return entity.getNo();
 	}
-//asas
+	
 	@Override
-	public List<BoardDTO> getList() {
-		List<Board> entityList = repository.findAll();		
-		List<BoardDTO> dtoList = entityList.stream()
+	public List<NoticeDTO> getList() {
+		List<Notice> entityList = repository.findAll();		
+		List<NoticeDTO> dtoList = entityList.stream()
 				.map(entity -> entityToDto(entity))
 				.collect(Collectors.toList());
 
@@ -37,21 +35,21 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public BoardDTO read(int no) {
-        Optional<Board> result = repository.findById(no);
+	public NoticeDTO read(int no) {
+        Optional<Notice> result = repository.findById(no);
         if(result.isPresent()) {
-        	Board board =  result.get();
-        	return entityToDto(board);
+        	Notice notice =  result.get();
+        	return entityToDto(notice);
         } else {
         	return null;
         }
 	}
 
 	@Override
-	public void modify(BoardDTO dto) {
-        Optional<Board> result = repository.findById(dto.getNo());
+	public void modify(NoticeDTO dto) {
+        Optional<Notice> result = repository.findById(dto.getNo());
         if(result.isPresent()){
-            Board entity = result.get();
+        	Notice entity = result.get();
             entity.setTitle(dto.getTitle());
             entity.setContent(dto.getContent());
             repository.save(entity);
@@ -62,5 +60,4 @@ public class BoardServiceImpl implements BoardService {
 	public void remove(int no) {
 		repository.deleteById(no);
 	}
-
 }

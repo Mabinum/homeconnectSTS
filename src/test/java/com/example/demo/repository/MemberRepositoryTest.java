@@ -32,8 +32,6 @@ public class MemberRepositoryTest {
 					.birthdate(LocalDate.of(2024, 02, 11))
 					.sex("성별"+i)
 					.address("주소"+i)
-					.dong("101동"+i)
-					.hosu("101호"+i)
 					.build();
 			
 			memberRepository.save(member);

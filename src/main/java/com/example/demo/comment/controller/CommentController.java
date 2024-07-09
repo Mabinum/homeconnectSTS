@@ -33,6 +33,14 @@ public class CommentController {
 
 		return commentlist;
 	}
+	
+	@ResponseBody
+	@GetMapping("/notice/list")
+	public List<CommentDTO> list2(@RequestParam(name = "noticeNo") int noticeNo) {
+		List<CommentDTO> commentlist = service.getListByNoticeNo(noticeNo);
+
+		return commentlist;
+	}
 		
 	@ResponseBody
 	@PostMapping("/register")

@@ -39,14 +39,7 @@ public class Member extends BaseEntity  {
 	
 	@Column(length = 255)
 	String address;
-	
-	@Column(length = 100)
-	String dong;
-	
-	@Column(length = 100)
-	String hosu;
 
-//	@Column(length = 100, nullable = false)
-	@Column(length = 100)
+	@Column(length = 100, nullable = false)
 	String role;
 }
