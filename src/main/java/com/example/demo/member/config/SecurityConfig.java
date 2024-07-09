@@ -74,9 +74,15 @@ public class SecurityConfig {
 		// 2.권한 설정: 회원등록-아무나, 게시물-user, 회원-admin
 		http
          .authorizeHttpRequests()
+<<<<<<< HEAD
          .requestMatchers("/login/*","/fee/*", "/community/*","/pay/*").permitAll()
          .requestMatchers("/board/*", "/comment/*").hasAnyRole("USER","ADMIN")
 //         .requestMatchers("/notice/*").hasRole("ADMIN")
+=======
+         .requestMatchers("/login/*","/fee/*","/login","/menu4/*", "/community/*","/pay/*").permitAll()
+         .requestMatchers("/menu4/*", "/comment/*").hasAnyRole("USER","ADMIN")
+         .requestMatchers("/feelnput", "/menu4/Noticemain").hasRole("ADMIN")
+>>>>>>> branch 'develop' of https://github.com/Mabinum/homeconnectSTS.git
          .anyRequest().authenticated()
          .and()
          .csrf().disable() //csrf 비활성화
