@@ -19,14 +19,14 @@ import com.example.demo.community.dto.CommunityDTO;
 import com.example.demo.community.service.CommunityService;
 
 @RestController
-@RequestMapping("/menu4")
+@RequestMapping("/community")
 public class CommunityController {
 
 	@Autowired
 	CommunityService service;
 
 	// 목록불러오기
-	@GetMapping("/community")
+	@GetMapping("/list")
 	public ResponseEntity<List<CommunityDTO>> getList() {
 		List<CommunityDTO> list = service.getList();
 		return new ResponseEntity<>(list, HttpStatus.OK); // 200성공코드와 게시물목록을 반환한다
@@ -36,7 +36,7 @@ public class CommunityController {
 
 	// 등록처리
 
-    @PostMapping("/communityregister")
+    @PostMapping("/register")
 	// RedirectAttributes은 모델처럼 화면에 데이터를 전달하는 객체
 	// 화면에서 전달한 데이터를 파라미터로 수집
 	public ResponseEntity<Integer> registerPost(CommunityDTO dto, Principal principal) {
@@ -56,21 +56,21 @@ public class CommunityController {
 	}
 
 	// 상세화면
-	@GetMapping("/communityread")
+	@GetMapping("/read")
 	public ResponseEntity<CommunityDTO> read(@RequestParam(name = "no") int no) {
 		CommunityDTO dto = service.read(no);
 		return new ResponseEntity<>(dto, HttpStatus.OK); // 200성공코드와 게시물정보를 반환한다
 	}
 
 	// 수정화면
-	@PutMapping("/communitymodify")
+	@PutMapping("/modify")
 	public ResponseEntity modify(@RequestBody CommunityDTO dto, Principal principal) {
 		 service.modify(dto);
 		 return new ResponseEntity(HttpStatus.OK);
 	}
 
 	// 삭제처리
-	@DeleteMapping("/communityremove")
+	@DeleteMapping("/remove")
 	public ResponseEntity remove(@RequestParam(name = "no") int no) {
 		service.remove(no);
 		return new ResponseEntity(HttpStatus.OK);
@@ -78,7 +78,7 @@ public class CommunityController {
 
 	//localhost:8080/menu4/category?category=카테고리명
 	// 카테고리 별 목록 불러오기 푸시 여부 확인 다시 확인
-	@GetMapping("/communitycategory")
+	@GetMapping("/category")
     public ResponseEntity<List<CommunityDTO>> getByCategory(@RequestParam(name = "category") String category) {
         List<CommunityDTO> list = service.getCategory(category);
         return new ResponseEntity<>(list, HttpStatus.OK);

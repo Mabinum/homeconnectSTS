@@ -3,7 +3,6 @@ package com.example.demo.fee.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.IdClass;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,7 +13,6 @@ import lombok.ToString;
 
 @Entity
 @Table(name = "fees")
-@IdClass(FeeId.class) // 수정
 @Getter
 @Setter
 @ToString
@@ -31,7 +29,7 @@ public class FeeEntity {
 	@Column(length = 100)
 	String userId;
 	
-	@Id
+//	@Id
 	@Column(nullable = false)
 	int month;
 	
