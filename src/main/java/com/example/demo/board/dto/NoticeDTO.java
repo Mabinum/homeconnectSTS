@@ -1,5 +1,6 @@
 package com.example.demo.board.dto;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
@@ -27,4 +28,6 @@ public class NoticeDTO {
 	LocalDateTime regDate; //등록일
 
 	LocalDateTime modDate; //수정일
+	
+	LocalDate noticeDate; 
 }

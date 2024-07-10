@@ -24,6 +24,7 @@ public interface NoticeService {
 				.no(dto.getNo())
 				.title(dto.getTitle())
 				.content(dto.getContent())
+				.noticeDate(dto.getNoticeDate())
 				.writer(member)
 				.build();
 		return entity;
@@ -34,6 +35,7 @@ public interface NoticeService {
 				.no(entity.getNo())
 				.title(entity.getTitle())
 				.content(entity.getContent())
+				.noticeDate(entity.getNoticeDate())
 				.writer(entity.getWriter().getUserId())
 				.regDate(entity.getRegDate())
 				.modDate(entity.getModDate())

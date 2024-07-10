@@ -1,5 +1,7 @@
 package com.example.demo.board.entity;
 
+import java.time.LocalDate;
+
 import com.example.demo.member.entity.Member;
 
 import jakarta.persistence.Column;
@@ -35,5 +37,8 @@ public class Notice extends BaseEntity {
 
 	@ManyToOne
 	Member writer; // 작성자
+	
+	@Column(length = 100)
+	LocalDate noticeDate;
 
 }
