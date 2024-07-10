@@ -73,4 +73,33 @@ public class MemberServiceImpl implements MemberService {
 			return "사용가능한 아이디입니다.";
 		}
 	}
+	
+	@Override
+	public MemberDTO nameModify(MemberDTO dto) {
+		Optional<Member> result = repository.findByUserId(dto.getUserId());
+		if (result.isPresent()) {
+			Member member = result.get();
+			member.setName(dto.getName());
+			repository.save(member);
+			
+			return entityToDto(member);
+		} else {
+	        // Optional 값이 비어있는 경우에 대한 처리
+	        throw new RuntimeException("Member not found with userId: " + dto.getUserId());
+	    }
+	}
+	@Override
+	public MemberDTO nameModify(MemberDTO dto) {
+		Optional<Member> result = repository.findByUserId(dto.getUserId());
+		if (result.isPresent()) {
+			Member member = result.get();
+			member.setName(dto.getName());
+			repository.save(member);
+			
+			return entityToDto(member);
+		} else {
+			// Optional 값이 비어있는 경우에 대한 처리
+			throw new RuntimeException("Member not found with userId: " + dto.getUserId());
+		}
+	}
 }
