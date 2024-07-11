@@ -40,9 +40,21 @@ public class MemberController {
 		return new ResponseEntity<>(result, HttpStatus.CREATED);
 	}
 	
-	@PutMapping("/modify")
+	@PutMapping("/nameModify")
 	public ResponseEntity<MemberDTO> modify(@RequestBody MemberDTO dto) {
 		 MemberDTO result = service.nameModify(dto);
 		 return new ResponseEntity<>(result,HttpStatus.OK);
+	}
+	
+	@PutMapping("/addressModify")
+	public ResponseEntity<MemberDTO> modify2(@RequestBody MemberDTO dto) {
+		MemberDTO result = service.addressModify(dto);
+		return new ResponseEntity<>(result,HttpStatus.OK);
+	}
+
+	@PutMapping("/pwModify")
+	public ResponseEntity<MemberDTO> modify3(@RequestBody MemberDTO dto) {
+		MemberDTO result = service.pwModify(dto);
+		return new ResponseEntity<>(result,HttpStatus.OK);
 	}
 }

@@ -88,18 +88,33 @@ public class MemberServiceImpl implements MemberService {
 	        throw new RuntimeException("Member not found with userId: " + dto.getUserId());
 	    }
 	}
-//	@Override
-//	public MemberDTO nameModify1(MemberDTO dto) {
-//		Optional<Member> result = repository.findByUserId(dto.getUserId());
-//		if (result.isPresent()) {
-//			Member member = result.get();
-//			member.setName(dto.getName());
-//			repository.save(member);
-//			
-//			return entityToDto(member);
-//		} else {
-//			// Optional 값이 비어있는 경우에 대한 처리
-//			throw new RuntimeException("Member not found with userId: " + dto.getUserId());
-//		}
-//	}
+	@Override
+	public MemberDTO addressModify(MemberDTO dto) {
+		Optional<Member> result = repository.findByUserId(dto.getUserId());
+		if (result.isPresent()) {
+			Member member = result.get();
+			member.setAddress(dto.getAddress());
+			repository.save(member);
+			
+			return entityToDto(member);
+		} else {
+			// Optional 값이 비어있는 경우에 대한 처리
+			throw new RuntimeException("Member not found with userId: " + dto.getUserId());
+		}
+	}
+	
+	@Override
+	public MemberDTO pwModify(MemberDTO dto) {
+		Optional<Member> result = repository.findByUserId(dto.getUserId());
+		if (result.isPresent()) {
+			Member member = result.get();
+			member.setPw(dto.getPw());
+			repository.save(member);
+			
+			return entityToDto(member);
+		} else {
+			// Optional 값이 비어있는 경우에 대한 처리
+			throw new RuntimeException("Member not found with userId: " + dto.getUserId());
+		}
+	}
 }
