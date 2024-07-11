@@ -15,7 +15,7 @@ import com.example.demo.fee.repository.FeeRepository;
 public class FeeServicelmpl implements FeeService {
 	
 	@Autowired
-	private FeeRepository repository;
+	FeeRepository repository;
 	
     @Override
     public String register(FeeDTO dto) {

@@ -15,7 +15,7 @@ import com.example.demo.fee.service.FeeService;
 public class FeeController {
 	
 	@Autowired
-	private FeeService feeService;
+	FeeService feeService;
 
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody FeeDTO fee) {
