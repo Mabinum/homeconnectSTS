@@ -15,7 +15,9 @@ import lombok.ToString;
 @Builder
 public class FeeDTO {
 	
-	String UserId; // id
+	int no;
+	
+	String userId; // id
 	
 	int month; // 월
 	

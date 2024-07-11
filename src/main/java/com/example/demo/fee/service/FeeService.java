@@ -9,9 +9,9 @@ public interface FeeService {
 	
 	String register(FeeDTO dto);
     List<FeeDTO> getListByUserId(String userId);
-//    FeeDTO read(String userId);
-//    void modify(FeeDTO dto);
-//    void remove(String userId);
+    FeeDTO read(String userId);
+    void modify(FeeDTO dto);
+    void remove(String userId);
     
     default FeeEntity dtoToEntity(FeeDTO dto) {
 		FeeEntity entity = FeeEntity.builder()
@@ -26,7 +26,7 @@ public interface FeeService {
 
 	default FeeDTO entityToDto(FeeEntity entity) {
 		FeeDTO dto = FeeDTO.builder()
-				.UserId(entity.getUserId())
+				.userId(entity.getUserId())
 				.month(entity.getMonth())
 				.water(entity.getWater())
 				.electric(entity.getElectric())
