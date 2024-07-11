@@ -8,10 +8,10 @@ import com.example.demo.fee.entity.FeeEntity;
 public interface FeeService {
 	
 	String register(FeeDTO dto);
-    List<FeeDTO> getList();
-    FeeDTO read(String userId);
-    void modify(FeeDTO dto);
-    void remove(String userId);
+    List<FeeDTO> getListByUserId(String userId);
+//    FeeDTO read(String userId);
+//    void modify(FeeDTO dto);
+//    void remove(String userId);
     
     default FeeEntity dtoToEntity(FeeDTO dto) {
 		FeeEntity entity = FeeEntity.builder()
