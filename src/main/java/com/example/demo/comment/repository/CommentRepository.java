@@ -13,8 +13,9 @@ import jakarta.transaction.Transactional;
 public interface CommentRepository extends JpaRepository<Comment, Integer> {
 	
 	List<Comment> findByBoard(Board board);
-
+	
 	void deleteByBoard(Board board);
-
+	
+	void deleteByBoardNo(int boardNo);
 }
 

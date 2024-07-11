@@ -1,4 +1,4 @@
-package com.example.demo.comment.controller;
+package com.example.demo.noticeComment.controller;
 
 import java.security.Principal;
 import java.util.HashMap;
@@ -15,28 +15,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.example.demo.comment.dto.CommentDTO;
-import com.example.demo.comment.service.CommentService;
+import com.example.demo.noticeComment.dto.NoticeCommentDTO;
+import com.example.demo.noticeComment.service.NoticeCommentService;
 
 @Controller
-@RequestMapping("/comment")
-public class CommentController {
+@RequestMapping("/noticeComment")
+public class NoticeCommentController {
 	
 	@Autowired
-	CommentService service;
+	NoticeCommentService service;
 
 	//게시물별 댓글 목록 조회
 	@ResponseBody
 	@GetMapping("/list")
-	public List<CommentDTO> list(@RequestParam(name = "boardNo") int boardNo) {
-		List<CommentDTO> commentlist = service.getListByBoardNo(boardNo);
+	public List<NoticeCommentDTO> list(@RequestParam(name = "noticeNo") int noticeNo) {
+		List<NoticeCommentDTO> commentlist = service.getListByNoticeNo(noticeNo);
 
 		return commentlist;
 	}
 	
 	@ResponseBody
 	@PostMapping("/register")
-	public HashMap<String,Boolean> register(@RequestBody CommentDTO dto, Principal principal) { // 인증 객체
+	public HashMap<String,Boolean> register(@RequestBody NoticeCommentDTO dto, Principal principal) { // 인증 객체
 		HashMap<String,Boolean> map = new HashMap<>();
 		String id = principal.getName(); // 인증객체에서 사용자 아이디 꺼내기
 		dto.setWriter(id);		
@@ -47,7 +47,7 @@ public class CommentController {
 	
 	@ResponseBody
 	@PutMapping("/modify")
-	public void modify(@RequestBody CommentDTO dto, Principal principal) {
+	public void modify(@RequestBody NoticeCommentDTO dto, Principal principal) {
 		 service.modify(dto);
 	}
 
@@ -59,5 +59,4 @@ public class CommentController {
 		map.put("success", true);
 		return map;
 	}
-
 }

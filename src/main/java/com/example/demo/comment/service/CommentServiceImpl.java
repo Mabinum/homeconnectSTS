@@ -64,5 +64,13 @@ public class CommentServiceImpl implements CommentService {
 	public void remove(int no) {
 		repository.deleteById(no);
 	}	
+	
+	@Override
+	public void removeBoardNo(int boardNo) {
+		repository.deleteByBoardNo(boardNo);
+	}	
+	
+	
+
 
 }

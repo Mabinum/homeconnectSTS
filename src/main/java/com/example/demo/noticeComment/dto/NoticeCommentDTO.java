@@ -1,4 +1,4 @@
-package com.example.demo.comment.dto;
+package com.example.demo.noticeComment.dto;
 
 import java.time.LocalDateTime;
 
@@ -15,12 +15,12 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CommentDTO {
+public class NoticeCommentDTO {
+	
+	int commentNo; //댓글번호
 
-    int commentNo; //댓글번호
+    int noticeNo;
 
-    int boardNo; //글번호
-    
     String content; // 댓글내용
 
     String writer; // 작성자

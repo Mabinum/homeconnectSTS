@@ -1,4 +1,4 @@
-package com.example.demo.member.dto;
+package com.example.demo.board.dto;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -16,24 +16,18 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class MemberDTO {
-	
-	String userId;
-	
-	String pw;
-	
-	String name;
-	
-	LocalDate birthdate;
-	
-	String sex;
-	
-	String address;
-	
-	LocalDateTime regDate;
+public class NoticeDTO {
+	int no; //게시물번호
 
-    LocalDateTime modDate;
-    
-    String role;
+	String title; //제목
+
+	String content; //내용
+
+	String writer; //작성자
+
+	LocalDateTime regDate; //등록일
+
+	LocalDateTime modDate; //수정일
 	
+	LocalDate noticeDate; 
 }

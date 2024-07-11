@@ -8,14 +8,20 @@
 //import org.springframework.boot.test.context.SpringBootTest;
 //
 //import com.example.demo.board.entity.Board;
+//import com.example.demo.board.entity.Notice;
 //import com.example.demo.board.repository.BoardRepository;
+//import com.example.demo.board.repository.NoticeRepository;
+//import com.example.demo.member.entity.Member;
 //
 //@SpringBootTest
 //public class BoardRepositoryTest {
 //
 //	@Autowired
 //	BoardRepository repository;
-//
+//	
+//	@Autowired
+//	NoticeRepository noticeRepository;
+//	
 //	@Test
 //	void 게시물등록() {
 //
@@ -26,10 +32,11 @@
 //
 //	@Test
 //	void 게시물10개등록() {
-//
+//		Member member = Member.builder().userId("admin1").build();
+//		
 //		for (int i = 1; i <= 10; i++) {
-//			Board board = Board.builder().title(i + "번글").content("내용입니다").writer("원석" + i).build();
-//			repository.save(board);
+//			Notice notice = Notice.builder().title(i + "번글").content("내용입니다").writer(member).build();
+//			noticeRepository.save(notice);
 //		}
 //
 //	}

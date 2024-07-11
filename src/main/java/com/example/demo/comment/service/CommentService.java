@@ -18,6 +18,8 @@ public interface CommentService {
 	void modify(CommentDTO dto);
 
 	void remove(int no);
+	
+	void removeBoardNo(int boardNo);
 
 	default Comment dtoToEntity(CommentDTO dto) {
 

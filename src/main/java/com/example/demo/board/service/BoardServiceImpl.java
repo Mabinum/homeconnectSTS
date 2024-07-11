@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.board.dto.BoardDTO;
 import com.example.demo.board.entity.Board;
 import com.example.demo.board.repository.BoardRepository;
+import com.example.demo.comment.repository.CommentRepository;
 
 
 @Service
@@ -18,6 +19,9 @@ public class BoardServiceImpl implements BoardService {
 	@Autowired
 	BoardRepository repository;
 
+	@Autowired
+	CommentRepository commentRepository;
+	
 	@Override
 	public int register(BoardDTO dto) {
 		Board entity = dtoToEntity(dto);
@@ -25,7 +29,7 @@ public class BoardServiceImpl implements BoardService {
 
 		return entity.getNo();
 	}
-
+//asas
 	@Override
 	public List<BoardDTO> getList() {
 		List<Board> entityList = repository.findAll();		
@@ -60,6 +64,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public void remove(int no) {
+		commentRepository.deleteByBoardNo(no);
 		repository.deleteById(no);
 	}
 

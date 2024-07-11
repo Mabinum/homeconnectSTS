@@ -15,6 +15,8 @@ public interface MemberService {
 	
 	String idCheck(String userid);
 	
+	MemberDTO nameModify(MemberDTO dto);
+	
 	//엔티티를 DTO로 변환하는 메소드
 	default MemberDTO entityToDto(Member entity) {
 		MemberDTO dto = MemberDTO.builder()
@@ -24,8 +26,6 @@ public interface MemberService {
 				.address(entity.getAddress())
 				.sex(entity.getSex())
 				.birthdate(entity.getBirthdate())
-				.dong(entity.getDong())
-				.hosu(entity.getHosu())
 				.regDate(entity.getRegDate())
 				.modDate(entity.getModDate())
 				.role(entity.getRole())
@@ -43,8 +43,6 @@ public interface MemberService {
 				.address(dto.getAddress())
 				.sex(dto.getSex())
 				.birthdate(dto.getBirthdate())
-				.dong(dto.getDong())
-				.hosu(dto.getHosu())
 				.role(dto.getRole())
 				.build();
 		return entity;

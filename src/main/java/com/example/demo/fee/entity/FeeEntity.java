@@ -15,7 +15,10 @@ import lombok.ToString;
 
 @Entity
 @Table(name = "fees")
+<<<<<<< HEAD
 //@IdClass(FeeId.class) // 수정
+=======
+>>>>>>> refs/remotes/origin/develop
 @Getter
 @Setter
 @ToString
@@ -31,6 +34,10 @@ public class FeeEntity {
 	@Column(length = 100)
 	String userId;
 	
+<<<<<<< HEAD
+=======
+//	@Id
+>>>>>>> refs/remotes/origin/develop
 	@Column(nullable = false)
 	int month;
 	

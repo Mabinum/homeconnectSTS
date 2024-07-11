@@ -1,10 +1,15 @@
-package com.example.demo.community2.entity;
+package com.example.demo.board.entity;
+
+import java.time.LocalDate;
+
+import com.example.demo.member.entity.Member;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,8 +24,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Community2 extends BaseEntity{
-
+public class Notice extends BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int no; // 글번호
@@ -31,10 +35,10 @@ public class Community2 extends BaseEntity{
 	@Column(length = 1500, nullable = false)
 	String content; // 내용
 
-	@Column(length = 50, nullable = false)
-	String writer; // 작성자
+	@ManyToOne
+	Member writer; // 작성자
 	
-	@Column(length = 200, nullable = true)
-	private String imgPath; //첨부파일 이름
-	
+	@Column(length = 100)
+	LocalDate noticeDate;
+
 }
