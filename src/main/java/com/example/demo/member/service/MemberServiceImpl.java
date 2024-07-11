@@ -7,15 +7,31 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.example.demo.board.repository.BoardRepository;
+import com.example.demo.board.repository.NoticeRepository;
+import com.example.demo.comment.repository.CommentRepository;
 import com.example.demo.member.dto.MemberDTO;
 import com.example.demo.member.entity.Member;
 import com.example.demo.member.repository.MemberRepository;
+import com.example.demo.noticeComment.repository.NoticeCommentRepository;
 
 //@Service
 public class MemberServiceImpl implements MemberService {
 
 	@Autowired
 	private MemberRepository repository;
+	
+	@Autowired
+	BoardRepository boardRepository;
+
+	@Autowired
+	NoticeRepository noticeRepository;
+	
+	@Autowired
+	CommentRepository commentRepository;
+	
+	@Autowired
+	NoticeCommentRepository noticeCommentRepository;
 	
 	@Autowired
 	PasswordEncoder passwordEncoder;
@@ -108,7 +124,8 @@ public class MemberServiceImpl implements MemberService {
 		Optional<Member> result = repository.findByUserId(dto.getUserId());
 		if (result.isPresent()) {
 			Member member = result.get();
-			member.setPw(dto.getPw());
+			String enPw = passwordEncoder.encode(dto.getPw());
+			member.setPw(enPw);
 			repository.save(member);
 			
 			return entityToDto(member);
@@ -116,5 +133,14 @@ public class MemberServiceImpl implements MemberService {
 			// Optional 값이 비어있는 경우에 대한 처리
 			throw new RuntimeException("Member not found with userId: " + dto.getUserId());
 		}
+	}
+	
+	@Override
+	public void remove(String userId) {
+		noticeCommentRepository.deleteByUserId(userId);
+		commentRepository.deleteByUserId(userId);
+		noticeRepository.deleteByUserId(userId);
+		boardRepository.deleteByUserId(userId);
+		repository.deleteByUserId(userId);
 	}
 }

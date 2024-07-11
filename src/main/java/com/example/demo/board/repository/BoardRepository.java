@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.demo.board.entity.Board;
 
 public interface BoardRepository extends JpaRepository<Board, Integer>{
-
+	void deleteByUserId(String userId);
 }

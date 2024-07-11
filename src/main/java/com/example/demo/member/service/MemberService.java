@@ -20,6 +20,8 @@ public interface MemberService {
 	MemberDTO addressModify(MemberDTO dto);
 	
 	MemberDTO pwModify(MemberDTO dto);
+	
+	void remove(String userId);
 
 	//엔티티를 DTO로 변환하는 메소드
 	default MemberDTO entityToDto(Member entity) {

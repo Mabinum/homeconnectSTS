@@ -57,4 +57,9 @@ public class MemberController {
 		MemberDTO result = service.pwModify(dto);
 		return new ResponseEntity<>(result,HttpStatus.OK);
 	}
+	@PutMapping("/remove")
+	public ResponseEntity remove(@RequestParam(name = "userId") String userId) {
+		service.remove(userId);
+		return new ResponseEntity(HttpStatus.OK);
+	}
 }
