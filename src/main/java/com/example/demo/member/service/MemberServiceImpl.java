@@ -137,10 +137,8 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Override
 	public void remove(String userId) {
-		noticeCommentRepository.deleteByUserId(userId);
-		commentRepository.deleteByUserId(userId);
-		noticeRepository.deleteByUserId(userId);
-		boardRepository.deleteByUserId(userId);
+		noticeCommentRepository.deleteByWriterUserId(userId);
+		commentRepository.deleteByWriterUserId(userId);
 		repository.deleteByUserId(userId);
 	}
 }

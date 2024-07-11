@@ -18,6 +18,6 @@ public interface CommentRepository extends JpaRepository<Comment, Integer> {
 	
 	void deleteByBoardNo(int boardNo);
 	
-	void deleteByUserId(String userId);
+	void deleteByWriterUserId(String writerUserId);
 }
 

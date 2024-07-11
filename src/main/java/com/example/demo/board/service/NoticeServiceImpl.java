@@ -65,4 +65,14 @@ public class NoticeServiceImpl implements NoticeService{
 		noticeCommentRepository.deleteByNoticeNo(no);
 		repository.deleteById(no);
 	}
+	
+	@Override
+	public void userIdRemove(String userId) {
+		List<Notice> result = repository.findByWriterUserId(userId);
+		for(Notice notice : result) {
+			noticeCommentRepository.deleteByNoticeNo(notice.getNo());
+			repository.deleteById(notice.getNo());			
+		}
+	}
+
 }

@@ -18,7 +18,9 @@ public interface BoardService {
 	void modify(BoardDTO dto); //게시물 수정
 
 	void remove(int no); //게시물 삭제
-
+	
+	void userIdRemove(String userId);
+	
 	default Board dtoToEntity(BoardDTO dto) {
 		Member member = Member.builder().userId(dto.getWriter()).build();
 		

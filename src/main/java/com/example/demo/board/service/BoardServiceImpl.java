@@ -67,5 +67,14 @@ public class BoardServiceImpl implements BoardService {
 		commentRepository.deleteByBoardNo(no);
 		repository.deleteById(no);
 	}
+	
+	@Override
+	public void userIdRemove(String userId) {
+		List<Board> result = repository.findByWriterUserId(userId);
+		for(Board board : result) {
+			commentRepository.deleteByBoardNo(board.getNo());
+			repository.deleteById(board.getNo());			
+		}
+	}
 
 }

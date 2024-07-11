@@ -17,5 +17,5 @@ public interface NoticeCommentRepository extends JpaRepository<NoticeComment, In
 	
 	void deleteByNoticeNo(int noticeNo);
 	
-	void deleteByUserId(String userId);
+	void deleteByWriterUserId(String writerUserId);
 }

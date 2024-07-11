@@ -17,6 +17,8 @@ public interface NoticeService {
 
 	void remove(int no); //게시물 삭제
 
+	void userIdRemove(String userId);
+	
 	default Notice dtoToEntity(NoticeDTO dto) {
 		Member member = Member.builder().userId(dto.getWriter()).build();
 		
