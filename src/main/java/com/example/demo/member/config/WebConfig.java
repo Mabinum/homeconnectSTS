@@ -1,4 +1,4 @@
-package com.example.demo.config;
+package com.example.demo.member.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -23,14 +23,15 @@ public class WebConfig implements WebMvcConfigurer {
 	
 	@Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowedOrigins("http://localhost:3000")
-                .allowedOrigins("http://localhost:3001")
-                .allowedOrigins("http://localhost:3002")
-                .allowedOrigins("http://localhost:3003")
-                .allowedOrigins("http://localhost:3004")
-                .allowedOrigins("http://localhost:3005")
-                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS");
-    }
+	registry.addMapping("/**")
+	    .allowedOrigins("http://localhost:3000")
+	    .allowedOrigins("http://localhost:3001")
+        .allowedOrigins("http://localhost:3002")
+        .allowedOrigins("http://localhost:3003")
+        .allowedOrigins("http://localhost:3004")
+        .allowedOrigins("http://localhost:3005")
+	    .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+	    .allowedHeaders("Content-Type", "Authorization");
+	}
 }
 
