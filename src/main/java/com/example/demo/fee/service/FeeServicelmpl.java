@@ -34,8 +34,6 @@ public class FeeServicelmpl implements FeeService {
 
     @Override
     public FeeDTO read(String userId) {
-//    	Optional<FeeEntity> result = repository.findByUserId(userId);
-//        return result.map(this::entityToDto).orElse(null);
     	Optional<FeeEntity> result = repository.findByUserId(userId).stream().findFirst(); // 단일 엔티티 반환하도록 수정
         return result.map(this::entityToDto).orElse(null);
     }
