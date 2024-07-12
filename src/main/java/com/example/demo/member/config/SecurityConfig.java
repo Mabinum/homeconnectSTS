@@ -76,7 +76,7 @@ public class SecurityConfig {
          .authorizeHttpRequests()
          .requestMatchers("/login/*","/fee/*", "/community/*","/pay/*").permitAll()
          .requestMatchers("/board/*", "/comment/*","/notice/*","/noticeComment/*").hasAnyRole("USER","ADMIN")
-//         .requestMatchers("/notice/*").hasRole("ADMIN")
+//         .requestMatchers("/notice/*", "/feeinput/*", "/feeread/*").hasRole("ADMIN")
          .anyRequest().authenticated()
          .and()
          .csrf().disable() //csrf 비활성화
