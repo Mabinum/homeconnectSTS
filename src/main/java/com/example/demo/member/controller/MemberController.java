@@ -1,5 +1,7 @@
 package com.example.demo.member.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,6 +43,12 @@ public class MemberController {
 	public ResponseEntity<MemberDTO> read(@RequestParam(name = "userId") String userId, @RequestParam(name = "pw") String pw) {
 		MemberDTO dto = service.read(userId);
 		return new ResponseEntity<>(dto, HttpStatus.OK); //200성공코드와 회원목록 반환
+	}
+	
+	@GetMapping("adminPage")
+	public ResponseEntity<List<MemberDTO>> getList() {
+		List<MemberDTO> result = service.getList();
+		return new ResponseEntity<>(result, HttpStatus.OK); //200성공코드와 회원목록 반환
 	}
 	
 	@GetMapping("/idcheck")
