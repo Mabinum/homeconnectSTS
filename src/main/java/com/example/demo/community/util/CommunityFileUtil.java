@@ -15,8 +15,8 @@
 // * 전달받은 파일스트림을 특정 폴더에 저장하고 파일이름을 반환한다
 // * 만약 파일스트림이 없다면 메소드를 바로 종료한다
 // * */
-//@Component
-//public class FileUtil {
+//@Component("Community")
+//public class CommunityFileUtil {
 //
 //	//이미지 파일을 저장할 경로
 //	@Value("${filepath}")
