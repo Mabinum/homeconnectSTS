@@ -40,7 +40,7 @@ public class FeeServicelmpl implements FeeService {
 
     @Override
     public void modify(FeeDTO dto) {
-        Optional<FeeEntity> result = repository.findByUserIdAndMonthAndNo(dto.getUserId(), dto.getMonth(), dto.getNo());
+        Optional<FeeEntity> result = repository.findById(dto.getNo());
         if (result.isPresent()) {
             FeeEntity entity = result.get();
             entity.setMonth(dto.getMonth());

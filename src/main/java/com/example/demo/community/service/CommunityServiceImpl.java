@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import com.example.demo.community.dto.CommunityDTO;
 import com.example.demo.community.entity.Community;
 import com.example.demo.community.repository.CommunityRepository;
-import com.example.demo.util.FileUtil;
+import com.example.demo.community.util.FileUtil;
 
 
 @Service
