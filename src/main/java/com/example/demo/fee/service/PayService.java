@@ -16,6 +16,11 @@ public interface PayService {
 				.imp_uid(dto.getImp_uid())
 				.merchant_uid(dto.getMerchant_uid())
 				.amount(dto.getAmount())
+				.month(dto.getMonth())
+				.buyer_name(dto.getBuyer_name())
+				.card_name(dto.getCard_name())
+				.email(dto.getEmail())
+				.time(dto.getTime())
 				.build();
 		return entity;
 	}
@@ -25,6 +30,11 @@ public interface PayService {
 				.imp_uid(entity.getImp_uid())
 				.merchant_uid(entity.getMerchant_uid())
 				.amount(entity.getAmount())
+				.month(entity.getMonth())
+				.buyer_name(entity.getBuyer_name())
+				.card_name(entity.getCard_name())
+				.email(entity.getEmail())
+				.time(entity.getTime())
 				.build();
 		return dto;
 	}

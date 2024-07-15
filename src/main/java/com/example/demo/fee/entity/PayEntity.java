@@ -30,4 +30,19 @@ public class PayEntity {
 	
 	@Column
 	int amount;
+	
+	@Column
+	String month;
+	
+	@Column
+	String buyer_name; // 이름
+	
+	@Column
+    String email; // 이메일
+    
+	@Column
+    String card_name; // 카드이름
+    
+	@Column
+    String time; // 결제시간
 }
