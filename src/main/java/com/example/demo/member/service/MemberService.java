@@ -22,6 +22,8 @@ public interface MemberService {
 	MemberDTO pwModify(MemberDTO dto);
 	
 	void remove(String userId);
+	
+	void communityJoin(MemberDTO dto); // 커뮤니티 가입
 
 	//엔티티를 DTO로 변환하는 메소드
 	default MemberDTO entityToDto(Member entity) {
@@ -35,6 +37,7 @@ public interface MemberService {
 				.regDate(entity.getRegDate())
 				.modDate(entity.getModDate())
 				.role(entity.getRole())
+				.communityNo(entity.getCommunityNo())
 				.build();
 
 		return dto;
@@ -50,6 +53,7 @@ public interface MemberService {
 				.sex(dto.getSex())
 				.birthdate(dto.getBirthdate())
 				.role(dto.getRole())
+				.communityNo(dto.getCommunityNo())
 				.build();
 		return entity;
 	}

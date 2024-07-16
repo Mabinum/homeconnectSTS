@@ -13,4 +13,6 @@ public interface NoticeRepository extends JpaRepository<Notice, Integer> {
 	void deleteByWriterUserId(String writerUserId);
 	
 	List<Notice> findByWriterUserId(String userId);
+	
+	List<Notice> findByTitleContaining(String title);
 }

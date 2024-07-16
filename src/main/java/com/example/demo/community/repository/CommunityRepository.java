@@ -9,4 +9,5 @@ import com.example.demo.community.entity.Community;
 public interface CommunityRepository extends JpaRepository<Community, Integer>{
 
 	List<Community> findByCategory(String category);
+	
 }
