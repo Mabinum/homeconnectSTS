@@ -4,6 +4,7 @@ import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -43,8 +44,14 @@ public class BoardController {
 	
 
 	@GetMapping("/list")
-	public ResponseEntity<List<BoardDTO>> getList() {
-		List<BoardDTO> list = service.getList();
+	public ResponseEntity<Page<BoardDTO>> getList(@RequestParam(defaultValue = "0", name = "page")int page) {
+		Page<BoardDTO> list = service.getList(page);
+		return new ResponseEntity<>(list, HttpStatus.OK); //200성공코드와 게시물목록을 반환한다
+	}
+	
+	@GetMapping("/searchTitle")
+	public ResponseEntity<List<BoardDTO>> searchtitle(@RequestParam(name = "title") String title) {
+		List<BoardDTO> list = service.searchtitle(title);
 		return new ResponseEntity<>(list, HttpStatus.OK); //200성공코드와 게시물목록을 반환한다
 	}
 

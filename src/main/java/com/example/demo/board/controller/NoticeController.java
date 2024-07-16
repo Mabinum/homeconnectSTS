@@ -41,6 +41,12 @@ public class NoticeController {
 		return new ResponseEntity<>(list, HttpStatus.OK); //200성공코드와 게시물목록을 반환한다
 	}
 
+	@GetMapping("/searchTitle")
+	public ResponseEntity<List<NoticeDTO>> searchtitle(@RequestParam(name = "title") String title) {
+		List<NoticeDTO> list = service.searchtitle(title);
+		return new ResponseEntity<>(list, HttpStatus.OK); //200성공코드와 게시물목록을 반환한다
+	}
+	
 	@GetMapping("/read")
 	public ResponseEntity<NoticeDTO> read(@RequestParam(name = "no") int no) {
 		NoticeDTO dto = service.read(no);
