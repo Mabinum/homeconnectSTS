@@ -42,4 +42,11 @@ public class Member extends BaseEntity  {
 
 	@Column(length = 100, nullable = false)
 	String role;
+	
+	@Column(length = 100)
+	Integer communityNo;
+	
+	public void setCommunityNo(Integer communityNo) {
+	    this.communityNo = communityNo != null ? communityNo : 0;
+	}
 }

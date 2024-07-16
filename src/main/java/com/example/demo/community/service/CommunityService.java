@@ -7,7 +7,7 @@ import com.example.demo.community.entity.Community;
 
 public interface CommunityService {
 
-	// 게시물 등록
+	    // 게시물 등록
 		int register(CommunityDTO dto);
 
 		// 게시물 목록조회

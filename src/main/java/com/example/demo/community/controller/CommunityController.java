@@ -2,6 +2,7 @@ package com.example.demo.community.controller;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,7 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.community.dto.CommunityDTO;
+import com.example.demo.community.repository.CommunityRepository;
 import com.example.demo.community.service.CommunityService;
+import com.example.demo.member.dto.MemberDTO;
+import com.example.demo.member.service.MemberService;
 
 @RestController
 @RequestMapping("/community")
@@ -24,6 +28,13 @@ public class CommunityController {
 
 	@Autowired
 	CommunityService service;
+	
+	@Autowired
+	CommunityRepository repository;
+	
+	@Autowired
+	MemberService memberService;
+	
 
 	// 목록불러오기
 	@GetMapping("/list")
@@ -32,11 +43,9 @@ public class CommunityController {
 		return new ResponseEntity<>(list, HttpStatus.OK); // 200성공코드와 게시물목록을 반환한다
 	}
 
-
-
 	// 등록처리
 
-    @PostMapping("/register")
+	@PostMapping("/register")
 	// RedirectAttributes은 모델처럼 화면에 데이터를 전달하는 객체
 	// 화면에서 전달한 데이터를 파라미터로 수집
 	public ResponseEntity<Integer> registerPost(CommunityDTO dto, Principal principal) {
@@ -65,8 +74,8 @@ public class CommunityController {
 	// 수정화면
 	@PutMapping("/modify")
 	public ResponseEntity modify(@RequestBody CommunityDTO dto, Principal principal) {
-		 service.modify(dto);
-		 return new ResponseEntity(HttpStatus.OK);
+		service.modify(dto);
+		return new ResponseEntity(HttpStatus.OK);
 	}
 
 	// 삭제처리
@@ -76,12 +85,23 @@ public class CommunityController {
 		return new ResponseEntity(HttpStatus.OK);
 	}
 
-	//localhost:8080/menu4/category?category=카테고리명
+	// localhost:8080/menu4/category?category=카테고리명
 	// 카테고리 별 목록 불러오기 푸시 여부 확인 다시 확인
 	@GetMapping("/category")
-    public ResponseEntity<List<CommunityDTO>> getByCategory(@RequestParam(name = "category") String category) {
-        List<CommunityDTO> list = service.getCategory(category);
-        return new ResponseEntity<>(list, HttpStatus.OK);
-    }
-	
+	public ResponseEntity<List<CommunityDTO>> getByCategory(@RequestParam(name = "category") String category) {
+		List<CommunityDTO> list = service.getCategory(category);
+		return new ResponseEntity<>(list, HttpStatus.OK);
+	}
+
+	@PostMapping("/join")
+	public ResponseEntity<MemberDTO> join(@RequestBody Map<String, Object> requestBody, Principal principal) {
+	    Integer communityNo = (Integer) requestBody.get("communityNo");
+	    String userId = principal.getName();
+
+	    MemberDTO memberDTO = MemberDTO.builder().userId(userId).communityNo(communityNo).build();
+
+	    memberService.communityJoin(memberDTO);
+
+	    return new ResponseEntity<>(memberDTO, HttpStatus.OK);
+	}
 }

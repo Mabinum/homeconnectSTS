@@ -35,5 +35,7 @@ public class MemberDTO {
     LocalDateTime modDate;
     
     String role;
+    
+    Integer communityNo;
 	
 }
