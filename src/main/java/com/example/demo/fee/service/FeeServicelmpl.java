@@ -30,6 +30,17 @@ public class FeeServicelmpl implements FeeService {
         return entityList.stream()
                 .map(this::entityToDto)
                 .collect(Collectors.toList());
+
+    };
+    
+    @Override
+    public List<FeeDTO> getList() {
+    	List<FeeEntity> entityList = repository.findAll();
+    	List<FeeDTO> dtoList = entityList.stream()
+			.map(entity -> entityToDto(entity))
+			.collect(Collectors.toList());
+
+	return dtoList;
     }
 
     @Override

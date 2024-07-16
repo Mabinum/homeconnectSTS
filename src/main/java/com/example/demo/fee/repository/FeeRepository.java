@@ -1,7 +1,6 @@
 package com.example.demo.fee.repository;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -13,5 +12,4 @@ public interface FeeRepository extends JpaRepository<FeeEntity, Integer>{
 //	FeeId 삭제
 	 List<FeeEntity> findByUserId(String userId);
 	 
-	 Optional<FeeEntity> findByUserIdAndMonthAndNo(String userId, Integer month, Integer no);
 }

@@ -35,6 +35,12 @@ public class FeeController {
         List<FeeDTO> list = feeService.getListByUserId(userId);
         return new ResponseEntity<>(list, HttpStatus.OK); // 200 성공 코드와 게시물 목록을 반환한다
     }
+    
+    @GetMapping("/listAll")
+    public ResponseEntity<List<FeeDTO>> getList() {
+        List<FeeDTO> list = feeService.getList();
+        return new ResponseEntity<>(list, HttpStatus.OK); // 200 성공 코드와 게시물 목록을 반환한다
+    }
 
     @GetMapping("/read")
     public ResponseEntity<FeeDTO> read(@RequestParam(name = "userId") String userId) {
