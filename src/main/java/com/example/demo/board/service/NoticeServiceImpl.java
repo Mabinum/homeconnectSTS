@@ -37,6 +37,16 @@ public class NoticeServiceImpl implements NoticeService{
 
 		return dtoList;
 	}
+	
+	@Override
+	public List<NoticeDTO> searchtitle(String title) {
+		List<Notice> entityList = repository.findByTitleContaining(title);		
+		List<NoticeDTO> dtoList = entityList.stream()
+				.map(entity -> entityToDto(entity))
+				.collect(Collectors.toList());
+
+		return dtoList;
+	}
 
 	@Override
 	public NoticeDTO read(int no) {

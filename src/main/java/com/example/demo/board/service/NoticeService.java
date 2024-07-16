@@ -10,6 +10,8 @@ public interface NoticeService {
 	int register(NoticeDTO dto); //게시물 등록
 
 	List<NoticeDTO> getList(); //게시물 목록 조회
+	
+	List<NoticeDTO> searchtitle(String title);
 
 	NoticeDTO read(int no); //게시물 상세 조회
 

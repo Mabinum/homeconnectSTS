@@ -5,6 +5,10 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.board.dto.BoardDTO;
@@ -29,15 +33,25 @@ public class BoardServiceImpl implements BoardService {
 
 		return entity.getNo();
 	}
-//asas
-	@Override
-	public List<BoardDTO> getList() {
-		List<Board> entityList = repository.findAll();		
-		List<BoardDTO> dtoList = entityList.stream()
-				.map(entity -> entityToDto(entity))
-				.collect(Collectors.toList());
 
-		return dtoList;
+	@Override
+	public Page<BoardDTO> getList(int page) {
+//		Page<Board> entityList = repository.findAll();		
+//		Page<BoardDTO> dtoList = entityList.stream()
+//				.map(entity -> entityToDto(entity))
+//				.collect(Collectors.toList());
+//		
+		// 페이지 번호를 인덱스로 변경. 페이지 인덱스는 0부터 시작됨
+		int pageNum = (page == 0) ? 0 : page - 1;
+		//페이지번호, 개수, 정렬방식을 입력하여 페이지 정보 생성
+		Pageable pageable = PageRequest.of(pageNum, 5, Sort.by("no").descending());
+		//게시물 목록 조회
+		Page<Board> entityPage = repository.findAll(pageable);
+		//스트림을 사용하여 엔티티 리스트를 DTO 리스트로 변환
+		Page<BoardDTO> dtoPage = entityPage.map( entity -> entityToDto(entity) );
+
+				
+		return dtoPage;
 	}
 
 	@Override
@@ -76,5 +90,16 @@ public class BoardServiceImpl implements BoardService {
 			repository.deleteById(board.getNo());			
 		}
 	}
+	
+	@Override
+	public List<BoardDTO> searchtitle(String title) {
+		List<Board> entityList = repository.findByTitleContaining(title);		
+		List<BoardDTO> dtoList = entityList.stream()
+				.map(entity -> entityToDto(entity))
+				.collect(Collectors.toList());
+
+		return dtoList;
+	}
+	
 
 }

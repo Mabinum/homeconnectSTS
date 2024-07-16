@@ -56,12 +56,6 @@ public class CommunityController {
 		// 게시물 등록하고 새로운 게시물 번호 반환
 		int no = service.register(dto);
 		return new ResponseEntity<>(no, HttpStatus.OK);
-
-		// 목록화면에 새로운 게시물 번호 전달
-//        redirectAttributes.addFlashAttribute("msg", no);
-
-		// 목록화면으로 이동. HTML경로아님. url주소를 작성할것
-//        return "redirect:/menu4/community";
 	}
 
 	// 상세화면
