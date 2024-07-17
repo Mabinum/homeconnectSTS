@@ -1,8 +1,10 @@
 package com.example.demo.member.entity;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
@@ -43,7 +45,14 @@ public class Member extends BaseEntity  {
 	@Column(length = 100, nullable = false)
 	String role;
 	
-	@Column(length = 255)
-	String communityNo;
+	 @ElementCollection
+	    private List<Integer> communityNos;
 
+	    public List<Integer> getCommunityNos() {
+	        return communityNos;
+	    }
+
+	    public void setCommunityNos(List<Integer> communityNos) {
+	        this.communityNos = communityNos;
+	    }
 }

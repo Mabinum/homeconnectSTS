@@ -2,7 +2,6 @@ package com.example.demo.community.controller;
 
 import java.security.Principal;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -87,17 +86,26 @@ public class CommunityController {
 		return new ResponseEntity<>(list, HttpStatus.OK);
 	}
 
+//	public ResponseEntity<MemberDTO> join(@RequestBody Map<String, Object> requestBody, Principal principal) {
+//	    String communityNo = (String) requestBody.get("communityNo");
+//	    String userId = principal.getName();
+//
+//	    MemberDTO memberDTO = MemberDTO.builder().userId(userId).communityNo(communityNo).build();
+//
+//	    memberService.communityJoin(memberDTO);
+//
+//	    return new ResponseEntity<>(memberDTO, HttpStatus.OK);
+//	}
 	@PostMapping("/join")
-	public ResponseEntity<MemberDTO> join(@RequestBody Map<String, Object> requestBody, Principal principal) {
-	    String communityNo = (String) requestBody.get("communityNo");
-	    String userId = principal.getName();
+    public ResponseEntity<String> updateCommunityNo(@RequestBody MemberDTO dto, Principal principal) {
+        String Id = principal.getName();
+        dto.setUserId(Id);
 
-	    MemberDTO memberDTO = MemberDTO.builder().userId(userId).communityNo(communityNo).build();
+        memberService.updateCommunityNoByUserId(dto);
 
-	    memberService.communityJoin(memberDTO);
-
-	    return new ResponseEntity<>(memberDTO, HttpStatus.OK);
-	}
+        return new ResponseEntity<>("CommunityNo updated successfully", HttpStatus.OK);
+    }
+	
 	
 //	 @GetMapping("/communitymember")
 //	    public ResponseEntity<List<Member>> getMembersByCommunityNo(@RequestParam Integer communityNo) {
