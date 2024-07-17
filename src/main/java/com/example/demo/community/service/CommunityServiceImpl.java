@@ -11,9 +11,9 @@ import org.springframework.stereotype.Service;
 import com.example.demo.community.dto.CommunityDTO;
 import com.example.demo.community.entity.Community;
 import com.example.demo.community.repository.CommunityRepository;
+import com.example.demo.community.util.CommunityFileUtil;
 import com.example.demo.member.entity.Member;
 import com.example.demo.member.repository.MemberRepository;
-import com.example.demo.util.FileUtil;
 
 
 
@@ -27,7 +27,7 @@ public class CommunityServiceImpl implements CommunityService{
 	MemberRepository memberRepository;
 	
 	@Autowired
-	private FileUtil fileUtil;
+	private CommunityFileUtil fileUtil;
 	
 	// 상속받은 메소드 구현하기
 		@Override

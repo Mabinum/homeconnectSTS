@@ -140,18 +140,19 @@ public class MemberServiceImpl implements MemberService {
 		repository.deleteByUserId(userId);
 	}
 
-//	@Override
-//	public void communityJoin(MemberDTO dto) {
-//		Optional<Member> result = repository.findByUserId(dto.getUserId());
-//		if (result.isPresent()) {
-//			Member member = result.get();
-//			member.setCommunityNo(dto.getCommunityNo());
-//			repository.save(member);
-//		} else {
-//			throw new RuntimeException("회원 정보를 찾을 수 없습니다.");
-//		}
-//
-//	}
+	@Override
+	public MemberDTO communityJoin(MemberDTO dto) {
+		Optional<Member> result = repository.findByUserId(dto.getUserId());
+		if (result.isPresent()) {
+			Member member = result.get();
+			member.setCommunityNo(dto.getCommunityNo());
+			repository.save(member);
+			return entityToDto(member);
+		} else {
+			throw new RuntimeException("회원 정보를 찾을 수 없습니다.");
+		}
+
+	}
 
 //	@Override
 //	public List<MemberDTO> getCommunityNo(String communityNo) {
