@@ -148,10 +148,26 @@ public class MemberServiceImpl implements MemberService {
 		if (result.isPresent()) {
 			Member member = result.get();
 			member.setCommunityNo(dto.getCommunityNo());
-			repository.save(member);	
+			repository.save(member);
 		} else {
             throw new RuntimeException("회원 정보를 찾을 수 없습니다.");
         }
 	
+		
+		
 	}
+
+	@Override
+	public List<MemberDTO> getCommunityNo(Integer communityNo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+//	@Override
+//	public List<MemberDTO> getCommunityNo(Integer communityNo) {
+//	    List<Member> members = repository.findByCommunityNo(communityNo);
+//	    return members.stream()
+//	                  .map(this::entityToDto)
+//	                  .collect(Collectors.toList());
+//	}
 }

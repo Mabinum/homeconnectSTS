@@ -1,5 +1,6 @@
 package com.example.demo.member.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -17,6 +18,9 @@ public interface MemberRepository extends JpaRepository<Member,String >{
 	
 	void deleteByUserId(String userId);
 	
+
+	List<Member> findByCommunityNo(Integer communityNo);
+
 
     @Modifying
     @Query("UPDATE Member m SET m.communityNo = :communityNo WHERE m.userId = :userId")
