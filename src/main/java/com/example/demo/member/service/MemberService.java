@@ -23,9 +23,9 @@ public interface MemberService {
 	
 	void remove(String userId);
 	
-	void communityJoin(MemberDTO dto); // 커뮤니티 
-	
-	void updateCommunityNoByUserId(MemberDTO dto);
+//	void communityJoin(MemberDTO dto); // 커뮤니티 
+//	
+//	void updateCommunityNoByUserId(MemberDTO dto);
 
 	//엔티티를 DTO로 변환하는 메소드
 	default MemberDTO entityToDto(Member entity) {
