@@ -2,6 +2,7 @@ package com.example.demo.community.controller;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.community.dto.CommunityDTO;
 import com.example.demo.community.repository.CommunityRepository;
 import com.example.demo.community.service.CommunityService;
+import com.example.demo.member.dto.MemberDTO;
 import com.example.demo.member.service.MemberService;
 
 @RestController
@@ -69,6 +71,13 @@ public class CommunityController {
 		service.modify(dto);
 		return new ResponseEntity(HttpStatus.OK);
 	}
+	
+	@PutMapping("/pluscommunityno")
+	public ResponseEntity pluscommunityno(@RequestParam(name = "no") int no, Principal principal) {
+		String id = principal.getName();
+		service.plusCommunityNo(id,no);
+		return new ResponseEntity(HttpStatus.OK);
+	}
 
 	// 삭제처리
 	@DeleteMapping("/remove")
@@ -84,28 +93,18 @@ public class CommunityController {
 		List<CommunityDTO> list = service.getCategory(category);
 		return new ResponseEntity<>(list, HttpStatus.OK);
 	}
+	
+	@PostMapping("/join")
+	public ResponseEntity<MemberDTO> join(@RequestBody Map<String, Object> requestBody, Principal principal) {
+	    String communityNo = (String) requestBody.get("communityNo");
+	    String userId = principal.getName();
 
-//	public ResponseEntity<MemberDTO> join(@RequestBody Map<String, Object> requestBody, Principal principal) {
-//	    String communityNo = (String) requestBody.get("communityNo");
-//	    String userId = principal.getName();
-//
-//	    MemberDTO memberDTO = MemberDTO.builder().userId(userId).communityNo(communityNo).build();
-//
-//	    memberService.communityJoin(memberDTO);
-//
-//	    return new ResponseEntity<>(memberDTO, HttpStatus.OK);
-//	}
-//	@PostMapping("/join")
-//    public ResponseEntity<String> updateCommunityNo(@RequestBody MemberDTO dto, Principal principal) {
-//        String Id = principal.getName();
-//        dto.setUserId(Id);
-//
-//	    MemberDTO memberDTO = MemberDTO.builder().userId(userId).communityNo(communityNo).build();
-//	    
-//	    memberService.communityJoin(memberDTO);
-//
-//	    return new ResponseEntity<>(memberDTO, HttpStatus.OK);
-//	}
+	    MemberDTO memberDTO = MemberDTO.builder().userId(userId).communityNo(communityNo).build();
+
+	    memberService.communityJoin(memberDTO);
+
+	    return new ResponseEntity<>(memberDTO, HttpStatus.OK);
+	}
 //	 @GetMapping("/communitymember")
 //	    public ResponseEntity<List<Member>> getMembersByCommunityNo(@RequestParam Integer communityNo) {
 //	        List<Member> members = memberService.getCommunityNo(communityNo);

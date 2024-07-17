@@ -21,7 +21,9 @@ public interface CommunityService {
 
 		// 게시물 수정
 		void modify(CommunityDTO dto);
-
+		
+		void plusCommunityNo(String userId, int no);
+		
 		// 게시물 삭제
 		int remove(int no);
 		

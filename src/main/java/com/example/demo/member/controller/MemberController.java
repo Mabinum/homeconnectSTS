@@ -85,5 +85,4 @@ public class MemberController {
 		return new ResponseEntity(HttpStatus.OK);
 	}
 
-//	어디서 오류가 나는거지?
 }

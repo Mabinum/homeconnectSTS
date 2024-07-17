@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import com.example.demo.community.dto.CommunityDTO;
 import com.example.demo.community.entity.Community;
 import com.example.demo.community.repository.CommunityRepository;
+import com.example.demo.member.entity.Member;
+import com.example.demo.member.repository.MemberRepository;
 import com.example.demo.util.FileUtil;
 
 
@@ -20,6 +22,9 @@ public class CommunityServiceImpl implements CommunityService{
 
 	@Autowired
 	CommunityRepository repository;
+	
+	@Autowired
+	MemberRepository memberRepository;
 	
 	@Autowired
 	private FileUtil fileUtil;
@@ -92,6 +97,21 @@ public class CommunityServiceImpl implements CommunityService{
 			}
 
 		}
+		
+		@Override
+		public void plusCommunityNo(String userId, int no) {
+		    Optional<Member> id = memberRepository.findByUserId(userId);
+		    
+		    if (id.isPresent()) {
+		        Member member = id.get();
+		        String memberCommunityNo = member.getCommunityNo();
+		        String noAsString = String.valueOf(no); // int를 String으로 변환
+		        
+		        String result = memberCommunityNo.concat(noAsString);
+		        memberRepository.updateCommunityNoByUserId(result, userId);
+		    }
+		}
+
 
 		@Override
 		public int remove(int no) {

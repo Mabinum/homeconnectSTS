@@ -140,39 +140,4 @@ public class MemberServiceImpl implements MemberService {
 		repository.deleteByUserId(userId);
 	}
 
-	@Override
-	public void communityJoin(MemberDTO dto) {
-		Optional<Member> result = repository.findByUserId(dto.getUserId());
-		if (result.isPresent()) {
-			Member member = result.get();
-//			member.setCommunityNo(dto.getCommunityNo());
-			repository.save(member);
-		} else {
-			throw new RuntimeException("회원 정보를 찾을 수 없습니다.");
-		}
-
-	}
-
-//	@Override
-//	public List<MemberDTO> getCommunityNo(String communityNo) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-
-	 @Override
-	    public void updateCommunityNoByUserId(MemberDTO dto) {
-		 	Optional<Member> result = repository.findByCommunityNo(dto.getCommunityNo());
-		 	Member member = result.get();
-//		 	member.setCommunityNo(dto.getCommunityNo());
-	        repository.save(member);
-	}
-
-	
-//	@Override
-//	public List<MemberDTO> getCommunityNo(Integer communityNo) {
-//	    List<Member> members = repository.findByCommunityNo(communityNo);
-//	    return members.stream()
-//	                  .map(this::entityToDto)
-//	                  .collect(Collectors.toList());
-//	}
 }
