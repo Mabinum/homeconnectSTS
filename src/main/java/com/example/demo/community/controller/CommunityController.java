@@ -93,7 +93,7 @@ public class CommunityController {
 	    String userId = principal.getName();
 
 	    MemberDTO memberDTO = MemberDTO.builder().userId(userId).communityNo(communityNo).build();
-
+	    
 	    memberService.communityJoin(memberDTO);
 
 	    return new ResponseEntity<>(memberDTO, HttpStatus.OK);
