@@ -13,6 +13,7 @@ public interface FeeService {
     FeeDTO read(String userId);
     void modify(FeeDTO dto);
     void remove(String userId);
+    Boolean checkIdExists(String userId); 
     
     default FeeEntity dtoToEntity(FeeDTO dto) {
 		FeeEntity entity = FeeEntity.builder()

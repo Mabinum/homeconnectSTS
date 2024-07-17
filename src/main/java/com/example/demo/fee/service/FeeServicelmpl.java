@@ -68,4 +68,9 @@ public class FeeServicelmpl implements FeeService {
         repository.deleteAll(entities);
     }
 
+	@Override
+	public Boolean checkIdExists(String userId) {
+		return repository.existsByUserId(userId);
+	}
+
 }

@@ -63,4 +63,10 @@ public class FeeController {
         feeService.remove(userId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT); // 204 성공 코드를 반환한다
     }
+    
+    @GetMapping("/check/{userId}")
+    public ResponseEntity<Boolean> checkIdExists(@RequestParam(name = "userId") String userId) {
+        boolean exists = feeService.checkIdExists(userId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

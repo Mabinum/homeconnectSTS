@@ -12,4 +12,5 @@ public interface FeeRepository extends JpaRepository<FeeEntity, Integer>{
 //	FeeId 삭제
 	 List<FeeEntity> findByUserId(String userId);
 	 
+	 boolean existsByUserId(String userId);
 }
