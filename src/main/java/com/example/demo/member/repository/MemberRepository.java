@@ -19,7 +19,7 @@ public interface MemberRepository extends JpaRepository<Member,String >{
 	
 
     @Modifying
-    @Query("UPDATE Member m SET m.community_no = :communityNo WHERE m.user_id = :userId")
+    @Query("UPDATE Member m SET m.communityNo = :communityNo WHERE m.userId = :userId")
     void updateCommunityNoByUserId(@Param("communityNo") String communityNo, @Param("userId") String userId);
     
 //    public void updateCommunityNoForAdmin() {

@@ -36,6 +36,6 @@ public class MemberDTO {
     
     String role;
     
-    Integer communityNo;
+    String communityNo;
 	
 }
