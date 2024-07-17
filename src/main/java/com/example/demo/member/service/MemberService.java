@@ -25,7 +25,11 @@ public interface MemberService {
 	
 	void communityJoin(MemberDTO dto); // 커뮤니티 
 
-	List<MemberDTO> getCommunityNo(Integer communityNo);
+//	List<MemberDTO> getCommunityNo(String communityNo);
+	
+//	void updateCommunityNoByUserId(String communityNo, String userId);
+	void updateCommunityNoByUserId(MemberDTO dto);
+
 
 	//엔티티를 DTO로 변환하는 메소드
 	default MemberDTO entityToDto(Member entity) {
@@ -39,7 +43,7 @@ public interface MemberService {
 				.regDate(entity.getRegDate())
 				.modDate(entity.getModDate())
 				.role(entity.getRole())
-				.communityNo(entity.getCommunityNo())
+//				.communityNos(entity.getCommunityNos())
 				.build();
 
 		return dto;
@@ -55,7 +59,7 @@ public interface MemberService {
 				.sex(dto.getSex())
 				.birthdate(dto.getBirthdate())
 				.role(dto.getRole())
-				.communityNo(dto.getCommunityNo())
+//				.communityNo(dto.getCommunityNo())
 				.build();
 		
 		return entity;

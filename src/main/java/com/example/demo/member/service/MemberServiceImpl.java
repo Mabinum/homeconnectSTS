@@ -20,34 +20,32 @@ public class MemberServiceImpl implements MemberService {
 
 	@Autowired
 	private MemberRepository repository;
-	
+
 	@Autowired
 	BoardRepository boardRepository;
 
 	@Autowired
 	NoticeRepository noticeRepository;
-	
+
 	@Autowired
 	CommentRepository commentRepository;
-	
+
 	@Autowired
 	NoticeCommentRepository noticeCommentRepository;
-	
+
 	@Autowired
 	PasswordEncoder passwordEncoder;
-		
+
 	@Override
 	public List<MemberDTO> getList() {
-		
-		List<Member> entityList = repository.findAll();		
-		
-		List<MemberDTO> dtoList = entityList.stream()
-				.map(entity -> entityToDto(entity))
-				.collect(Collectors.toList());
+
+		List<Member> entityList = repository.findAll();
+
+		List<MemberDTO> dtoList = entityList.stream().map(entity -> entityToDto(entity)).collect(Collectors.toList());
 
 		return dtoList;
 	}
-	
+
 	@Override
 	public boolean register(MemberDTO dto) {
 		String id = dto.getUserId();
@@ -57,11 +55,10 @@ public class MemberServiceImpl implements MemberService {
 			return false;
 		}
 		Member entity = dtoToEntity(dto);
-		
+
 		// 패스워드 인코더로 패스워드 암호화하기
 		String enPw = passwordEncoder.encode(entity.getPw());
 		entity.setPw(enPw);
-
 
 		repository.save(entity);
 		return true;
@@ -89,7 +86,7 @@ public class MemberServiceImpl implements MemberService {
 			return "사용가능한 아이디입니다.";
 		}
 	}
-	
+
 	@Override
 	public MemberDTO nameModify(MemberDTO dto) {
 		Optional<Member> result = repository.findByUserId(dto.getUserId());
@@ -97,13 +94,14 @@ public class MemberServiceImpl implements MemberService {
 			Member member = result.get();
 			member.setName(dto.getName());
 			repository.save(member);
-			
+
 			return entityToDto(member);
 		} else {
-	        // Optional 값이 비어있는 경우에 대한 처리
-	        throw new RuntimeException("Member not found with userId: " + dto.getUserId());
-	    }
+			// Optional 값이 비어있는 경우에 대한 처리
+			throw new RuntimeException("Member not found with userId: " + dto.getUserId());
+		}
 	}
+
 	@Override
 	public MemberDTO addressModify(MemberDTO dto) {
 		Optional<Member> result = repository.findByUserId(dto.getUserId());
@@ -111,14 +109,14 @@ public class MemberServiceImpl implements MemberService {
 			Member member = result.get();
 			member.setAddress(dto.getAddress());
 			repository.save(member);
-			
+
 			return entityToDto(member);
 		} else {
 			// Optional 값이 비어있는 경우에 대한 처리
 			throw new RuntimeException("Member not found with userId: " + dto.getUserId());
 		}
 	}
-	
+
 	@Override
 	public MemberDTO pwModify(MemberDTO dto) {
 		Optional<Member> result = repository.findByUserId(dto.getUserId());
@@ -127,14 +125,14 @@ public class MemberServiceImpl implements MemberService {
 			String enPw = passwordEncoder.encode(dto.getPw());
 			member.setPw(enPw);
 			repository.save(member);
-			
+
 			return entityToDto(member);
 		} else {
 			// Optional 값이 비어있는 경우에 대한 처리
 			throw new RuntimeException("Member not found with userId: " + dto.getUserId());
 		}
 	}
-	
+
 	@Override
 	public void remove(String userId) {
 		noticeCommentRepository.deleteByWriterUserId(userId);
@@ -147,22 +145,29 @@ public class MemberServiceImpl implements MemberService {
 		Optional<Member> result = repository.findByUserId(dto.getUserId());
 		if (result.isPresent()) {
 			Member member = result.get();
-			member.setCommunityNo(dto.getCommunityNo());
+//			member.setCommunityNo(dto.getCommunityNo());
 			repository.save(member);
 		} else {
-            throw new RuntimeException("회원 정보를 찾을 수 없습니다.");
-        }
+			throw new RuntimeException("회원 정보를 찾을 수 없습니다.");
+		}
+
+	}
+
+//	@Override
+//	public List<MemberDTO> getCommunityNo(String communityNo) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+
+	 @Override
+	    public void updateCommunityNoByUserId(MemberDTO dto) {
+		 	Optional<Member> result = repository.findByCommunityNo(dto.getCommunityNo());
+		 	Member member = result.get();
+//		 	member.setCommunityNo(dto.getCommunityNo());
+	        repository.save(member);
+	}
+
 	
-		
-		
-	}
-
-	@Override
-	public List<MemberDTO> getCommunityNo(Integer communityNo) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 //	@Override
 //	public List<MemberDTO> getCommunityNo(Integer communityNo) {
 //	    List<Member> members = repository.findByCommunityNo(communityNo);
