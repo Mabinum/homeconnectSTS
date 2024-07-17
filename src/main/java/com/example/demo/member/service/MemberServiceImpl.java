@@ -141,11 +141,12 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public MemberDTO communityJoin(MemberDTO dto) {
-		Optional<Member> result = repository.findByUserId(dto.getUserId());
+	public MemberDTO communityJoin(String userId,int communityNo) {
+		Optional<Member> result = repository.findByUserId(userId);
 		if (result.isPresent()) {
 			Member member = result.get();
-			member.setCommunityNo(dto.getCommunityNo());
+			String noAsString = String.valueOf(communityNo); // int를 String으로 변환
+			member.setCommunityNo(noAsString);
 			repository.save(member);
 			return entityToDto(member);
 		} else {
