@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import com.example.demo.member.entity.Member;
 
@@ -15,6 +18,18 @@ public interface MemberRepository extends JpaRepository<Member,String >{
 	
 	void deleteByUserId(String userId);
 	
+
 	List<Member> findByCommunityNo(Integer communityNo);
 
+
+    @Modifying
+    @Query("UPDATE Member m SET m.community_no = :communityNo WHERE m.user_id = :userId")
+    void updateCommunityNoByUserId(@Param("communityNo") String communityNo, @Param("userId") String userId);
+    
+//    public void updateCommunityNoForAdmin() {
+//        String userId = "admin";
+//        String newCommunityNo = "1,2,3,4,5";
+//        memberRepository.updateCommunityNoByUserId(newCommunityNo, userId);
+//    }
+	
 }

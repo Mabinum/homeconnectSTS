@@ -98,4 +98,10 @@ public class CommunityController {
 
 	    return new ResponseEntity<>(memberDTO, HttpStatus.OK);
 	}
+	
+//	 @GetMapping("/communitymember")
+//	    public ResponseEntity<List<Member>> getMembersByCommunityNo(@RequestParam Integer communityNo) {
+//	        List<Member> members = memberService.getCommunityNo(communityNo);
+//	        return new ResponseEntity<>(members, HttpStatus.OK);
+//	    }
 }
