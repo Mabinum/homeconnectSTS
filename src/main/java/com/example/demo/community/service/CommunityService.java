@@ -27,6 +27,9 @@ public interface CommunityService {
 		// 게시물 삭제
 		int remove(int no);
 		
+		// 게시물 검색
+		List<CommunityDTO> searchTitle(String title);
+		
 
 		// dto를 엔티티로 변환하는 메소드
 		default Community dtoToEntity(CommunityDTO dto) { // default키워드를 사용하여 일반메소드 추가

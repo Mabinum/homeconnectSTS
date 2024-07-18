@@ -10,4 +10,5 @@ public interface CommunityRepository extends JpaRepository<Community, Integer>{
 
 	List<Community> findByCategory(String category);
 	
+	List<Community> findByTitleContaining(String title);
 }

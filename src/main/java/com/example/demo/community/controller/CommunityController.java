@@ -108,4 +108,21 @@ public class CommunityController {
 //	        List<Member> members = memberService.getCommunityNo(communityNo);
 //	        return new ResponseEntity<>(members, HttpStatus.OK);
 //	    }
+	
+	
+	// 검색
+	@GetMapping("/search")
+	public ResponseEntity<List<CommunityDTO>> search(@RequestParam(name = "title") String title) {
+		
+		List<CommunityDTO> list = service.searchTitle(title);
+		
+		return new ResponseEntity<>(list, HttpStatus.OK);
+		
+	}
 }
+
+	
+	
+	
+	
+	

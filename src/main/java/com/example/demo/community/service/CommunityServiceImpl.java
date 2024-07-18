@@ -15,115 +15,124 @@ import com.example.demo.community.util.CommunityFileUtil;
 import com.example.demo.member.entity.Member;
 import com.example.demo.member.repository.MemberRepository;
 
-
-
 @Service
-public class CommunityServiceImpl implements CommunityService{
+public class CommunityServiceImpl implements CommunityService {
 
 	@Autowired
 	CommunityRepository repository;
-	
+
 	@Autowired
 	MemberRepository memberRepository;
-	
+
 	@Autowired
 	private CommunityFileUtil fileUtil;
-	
+
 	// 상속받은 메소드 구현하기
-		@Override
-		public int register(CommunityDTO dto) {
+	@Override
+	public int register(CommunityDTO dto) {
 
-			Community entity = dtoToEntity(dto); // 파라미터로 전달받은 dto를 엔티티로 변환
+		Community entity = dtoToEntity(dto); // 파라미터로 전달받은 dto를 엔티티로 변환
 
-			// 유틸클래스를 이용해서 파일을 폴더에 저장하고 파일이름을 반환받는다
-			String imgPath = fileUtil.fileUpload(dto.getUploadFile());
-			// 그리고 엔티티에 파일이름을 저장한다
-			entity.setImgPath(imgPath);
+		// 유틸클래스를 이용해서 파일을 폴더에 저장하고 파일이름을 반환받는다
+		String imgPath = fileUtil.fileUpload(dto.getUploadFile());
+		// 그리고 엔티티에 파일이름을 저장한다
+		entity.setImgPath(imgPath);
 
-			repository.save(entity); // 리파지토리로 게시물 등록
-			int newNo = entity.getNo();
+		repository.save(entity); // 리파지토리로 게시물 등록
+		int newNo = entity.getNo();
 
-			return newNo; // 새로운 게시물의 번호 반환
+		return newNo; // 새로운 게시물의 번호 반환
+	}
+
+	@Override
+	public List<CommunityDTO> getList() {
+		List<Community> result = repository.findAll(); // 데이터베이스에서 게시물 목록을 가져온다
+		List<CommunityDTO> list = new ArrayList<>();
+		list = result.stream() // 리스트에서 스트림 생성
+				.map(entity -> entityToDto(entity)) // 중간연산으로 엔티티를 dto로 변환
+				.collect(Collectors.toList()); // 최종연산으로 결과를 리스트로 변환
+
+		return list; // 화면에 필요한 dto 리스트 반환
+	}
+
+	// 카테고리별 목록 조회
+	@Override
+	public List<CommunityDTO> getCategory(String category) {
+		List<Community> entityList = repository.findByCategory(category);
+		return entityList.stream().map(this::entityToDto).toList();
+	}
+
+	@Override
+	public CommunityDTO read(int no) { // 인자로 게시물 번호 받기
+
+		Optional<Community> result = repository.findById(no); // 특정 게시물 정보 가져오기
+
+		if (result.isPresent()) {
+			Community board = result.get();
+			CommunityDTO boardDTO = entityToDto(board); // 엔티티를 DTO로 변환
+			return boardDTO; // DTO 반환
+		} else {
+			return null;
 		}
 
-		@Override
-		public List<CommunityDTO> getList() {
-			List<Community> result = repository.findAll(); // 데이터베이스에서 게시물 목록을 가져온다
-			List<CommunityDTO> list = new ArrayList<>();
-			list = result.stream() // 리스트에서 스트림 생성
-					.map(entity -> entityToDto(entity)) // 중간연산으로 엔티티를 dto로 변환
-					.collect(Collectors.toList()); // 최종연산으로 결과를 리스트로 변환
+	}
 
-			return list; // 화면에 필요한 dto 리스트 반환
-		}
-		// 카테고리별 목록 조회 
-		@Override
-		public List<CommunityDTO> getCategory(String category) {
-			List<Community> entityList = repository.findByCategory(category);
-			return entityList.stream()
-					.map(this::entityToDto).toList();
-		}
+	@Override
+	public void modify(CommunityDTO dto) {
+		// 업데이트 하는 항목은 '제목', '내용'
 
-		@Override
-		public CommunityDTO read(int no) { // 인자로 게시물 번호 받기
+		// 전달받은 DTO에서 게시물 번호 꺼내고, 해당 게시물 조회
+		Optional<Community> result = repository.findById(dto.getNo());
+		if (result.isPresent()) { // 해당 게시물이 존재하는지 확인
+			Community entity = result.get();
 
-			Optional<Community> result = repository.findById(no); // 특정 게시물 정보 가져오기
+			// 기존 엔티티에서 제목과 내용만 변경
+			entity.setTitle(dto.getTitle());
+			entity.setContent(dto.getContent());
 
-			if (result.isPresent()) {
-				Community board = result.get();
-				CommunityDTO boardDTO = entityToDto(board); // 엔티티를 DTO로 변환
-				return boardDTO; // DTO 반환
-			} else {
-				return null;
-			}
-
+			// 다시 저장
+			repository.save(entity);
 		}
 
-		@Override
-		public void modify(CommunityDTO dto) {
-			// 업데이트 하는 항목은 '제목', '내용'
+	}
 
-			// 전달받은 DTO에서 게시물 번호 꺼내고, 해당 게시물 조회
-			Optional<Community> result = repository.findById(dto.getNo());
-			if (result.isPresent()) { // 해당 게시물이 존재하는지 확인
-				Community entity = result.get();
+	@Override
+	public void plusCommunityNo(String userId, int no) {
+		Optional<Member> id = memberRepository.findByUserId(userId);
 
-				// 기존 엔티티에서 제목과 내용만 변경
-				entity.setTitle(dto.getTitle());
-				entity.setContent(dto.getContent());
+		if (id.isPresent()) {
+			Member member = id.get();
+			String memberCommunityNo = member.getCommunityNo();
+			String noAsString = String.valueOf(no); // int를 String으로 변환
 
-				// 다시 저장
-				repository.save(entity);
-			}
-
+			String result = memberCommunityNo.concat(noAsString);
+			memberRepository.updateCommunityNoByUserId(result, userId);
 		}
+	}
+
+	@Override
+	public int remove(int no) {
+
+		Optional<Community> result = repository.findById(no);
+
+		if (result.isPresent()) {
+			repository.deleteById(no);
+			return 1; // 성공
+		} else {
+			return 0; // 실패
+		}
+
+	}
+
+	@Override
+	public List<CommunityDTO> searchTitle(String title) {
 		
-		@Override
-		public void plusCommunityNo(String userId, int no) {
-		    Optional<Member> id = memberRepository.findByUserId(userId);
-		    
-		    if (id.isPresent()) {
-		        Member member = id.get();
-		        String memberCommunityNo = member.getCommunityNo();
-		        String noAsString = String.valueOf(no); // int를 String으로 변환
-		        
-		        String result = memberCommunityNo.concat(noAsString);
-		        memberRepository.updateCommunityNoByUserId(result, userId);
-		    }
-		}
+		List<Community> entityList = repository.findByTitleContaining(title);
+		
+		List<CommunityDTO> dtoList = entityList.stream()
+				.map(entity -> entityToDto(entity))
+				.collect(Collectors.toList());
 
-
-		@Override
-		public int remove(int no) {
-
-			Optional<Community> result = repository.findById(no);
-
-			if (result.isPresent()) {
-				repository.deleteById(no);
-				return 1; // 성공
-			} else {
-				return 0; // 실패
-			}
-
-		}
+		return dtoList;
+	}
 }
