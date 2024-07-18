@@ -23,7 +23,7 @@ public interface MemberService {
 	
 	void remove(String userId);
 	
-	MemberDTO communityJoin(String userId,int communityNo); // 커뮤니티 
+	MemberDTO communityJoin(String userId, MemberDTO dto); // 커뮤니티 
 	
 //	void updateCommunityNoByUserId(MemberDTO dto);
 

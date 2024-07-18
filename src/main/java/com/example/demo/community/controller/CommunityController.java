@@ -94,12 +94,12 @@ public class CommunityController {
 	}
 	
 	@PostMapping("/join")
-	public ResponseEntity<MemberDTO> join(@RequestParam(name = "communityNo")int communityNo, Principal principal) {
+	public ResponseEntity<MemberDTO> join(@RequestBody MemberDTO dto, Principal principal) {
 	    String userId = principal.getName();
 
 //	    MemberDTO memberDTO = MemberDTO.builder().userId(userId).communityNo(communityNo).build();
 
-	    MemberDTO memberDTO = memberService.communityJoin(userId,communityNo);
+	    MemberDTO memberDTO = memberService.communityJoin(userId,dto);
 	    
 	    return new ResponseEntity<>(memberDTO, HttpStatus.OK);
 	}
